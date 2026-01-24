@@ -75,6 +75,14 @@ Austria		Vienna		48.2064	16.3707		1900547		Capital
 
 # macro is roughly: I[ "Country" = ", <esc>diWea"<esc>diWi"Capital" = "<esc>f<tab>i", "Pos" = [ <esc>diWf<tab>i, <esc>diWf<tab>i] ], Di <bspace><enter>0
 
+
+
+
+
+
+
+
+
 my_list = [
 	[ "Country" = "Afghanistan", "Capital" = "Kabul", "Pos" = [ 34.5289, 69.1725 ] ],  
 	[ "Country" = "Albania", "Capital" = "Tirana", "Pos" = [ 41.3275, 19.8189 ] ],  
@@ -86,14 +94,6 @@ my_list = [
 	[ "Country" = "Australia", "Capital" = "Canberra", "Pos" = [ -35.283, 149.128 ] ],  
 	[ "Country" = "Austria", "Capital" = "Vienna", "Pos" = [ 48.2064, 16.3707 ] ],  
 ]
-
-
-
-
-
-
-
-
 
 
 

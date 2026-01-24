@@ -8,8 +8,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Vim-101</title>
-  <link rel="icon" type="image/x-icon" href="../../logo.png">
-  <link rel="stylesheet" href="../../styles.css">
+  <link rel="icon" type="image/x-icon" href="/logo.png">
+  <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
   <div class="main">
@@ -121,8 +121,8 @@
       <section id="links">
         <div class="large">links:</div><br>
         <div class="medium"><a class="link" href="README.md">readme</a></div><br>
-        <div class="medium"><a class="link" href="https://www.ryanhub.org/view.php?repo=vim-demo.git">repository</a></div><br>
-        <div class="medium"><a class="link" href="../../index.php">IHC - home</a></div><br>
+        <div class="medium"><a class="link" href="https://www.ryanhub.org/repos/iheartcomputer-projects.git">repository</a></div><br>
+        <div class="medium"><a class="link" href="/">IHC - home</a></div><br>
       </section>
 
       <br><br><br><br>
