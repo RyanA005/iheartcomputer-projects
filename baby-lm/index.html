@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="IHEARTCOMPUTER">
+  <title>IHEARTCOMPUTER</title>
+  <link rel="icon" type="image/x-icon" href="../../logo.png">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <div class="main">
+    <header class="header">
+      <div class="title">
+        <strong class="large" style="align-self: flex-start;">I<span style="color: #e00;">♥</span>COMPUTER</strong>
+      </div>
+      <nav class="nav">
+        <a class="link" href="../../index.php">home</a>
+        <a class="link" href="https://discord.gg/JpRw84Ybwg" target="_blank">discord</a>
+        <a class="link" href="../../projects/">projects</a>
+      </nav>
+    </header>
+
+    <hr class="break">
+
+    <div class="content">
+		
+      <section id="title">
+        <strong class="large">Foundations of Language Models</strong><br><br>
+        <div class="medium">internals demonstrated through a simple implementation</div><br>
+        <img src="images/provider-logos.png" style="max-width: 40vw"><br><br>
+      </section><hr class="break">
+      <br><br><br><br>
+
+      <section id="goals">
+        <strong class="large">Demonstration Goals</strong><br><br>
+		<div class="medium">1. explain language model fundamentals</div><br>
+		<div class="medium">2. walk though the architecture of our simple model</div><br>
+		<div class="medium">3. discuss limitations and contrast with real LLMs</div><br>
+		<div class="medium">4. take a brief look at the implementation</div><br>
+		<div class="medium">5. play with inputs and see some funny outputs</div><br><br>
+		<div class="medium">get ready for some rhymes...</div><br>
+        <img src="images/drseuss.png" style="max-width: 40vw"><br>
+      </section><hr class="break">
+      <br><br><br><br>
+
+      <section id="key-terms">
+        <strong class="large">Key Terms</strong><br><br>
+        <div class="medium">
+			<strong>token</strong> 
+			= some string, can be a full word, multiple words, part of a word, punctuation, etc.<br>
+			<strong>vocab</strong>
+			= all the available tokens the model "understands" and can output<br>
+			<strong>parameter</strong>
+			= some numerical value stored by our model, parameter count is roughly analogous total storage size<br>
+			<strong>context</strong>
+			= some number of tokens which are used as the model input to generate more tokens<br>
+			<strong>logit</strong>
+			= raw (un-normalized) model "score" for each vocab word given some context<br>
+			<strong>softmax</strong>
+			= function which turns logit values into usable probabilities<br>
+			<strong>loss</strong>
+			= how wrong the model is when calculating probabilities<br>
+			<strong>sampling</strong>
+			= randomly choosing an option within a probability distribution<br>
+			<strong>temperature</strong>
+			= the "steepness" of the probability distribution<br>
+			<strong>training</strong>
+			= repeatedly adjusting parameters in order to reduce loss<br>
+		</div><br>
+      </section><hr class="break">
+      <br><br><br><br>
+
+      <section id="high-level">
+        <strong class="large">High Level Workings</strong><br><br>
+        <div class="medium">what does a language model even do?</div><br>
+        <div class="medium">
+			at their core, language models are token prediction engines <br>
+			given some context, they calculate the probability of any given token coming next <br>
+			this is achieved by attaching numeric values to tokens which "encode a semantic meaning" <br>
+		</div><br>
+        <img src="images/output-probabilities.png" style="max-width: 40vw"><br>
+        <div class="small">(sample output probabilities in our model)</div><br>
+      </section><hr class="break">
+      <br><br><br><br>
+
+      <section id="key-concepts">
+        <strong class="large">Key Concept</strong><br><br>
+        <div class="medium">
+			<strong>embeddings</strong> 
+			= a list of values for each token which give it "meaning" to the model<br>
+		</div><br>
+		<img src="images/output-embeddings.png" style="max-width: 60vw"><br>
+		<div class="small">(actual first 10 items in sample embedding vectors)</div><br>
+		<img src="images/abstract-embeddings.png" style="max-width: 40vw"><br>
+		<div class="small">(abstract idea of what embedding vectors might represent)</div><br>
+        <div class="medium">
+			<strong>note:</strong> 
+			the model does not label embedding dimensions and dimensions dont neccessarily have human meaning.<br>
+			however, in <em>well trained models</em>, similar tokens will have very similar embedding values, <br>
+			this shows us that within these vectors, meaning is being captured<br><br>
+
+			this results in the interesting property that we can "do algebra on words"<br>
+			<code>"mean" + "christmas" ~= "grinch"</code>
+		</div><br>
+      </section><hr class="break">
+      <br><br><br><br>
+
+      <section id="architecture">
+        <strong class="large">Model Architecture</strong><br><br>
+		<div class="medium"><strong>Generation</strong></div>
+		<img src="images/model-arch.png" style="max-width: 50vw"><br>
+		<div class="medium">our model begins with a few tokens of context, we add each one's embedding vector to produce a hidden representation</div>
+		<div class="medium">for the full vocabulary, we apply a dot product with the hidden vector, this produces logits</div>
+		<div class="medium">logits are passed through the softmax function to convert to probabilities</div>
+		<div class="medium">we sample from that distribution in order to choose the next word</div><br><br>
+		<div class="medium"><strong>Training</strong></div>
+		<img src="images/model-arch-2.png" style="max-width: 50vw"><br>
+		<div class="medium">to train, we follow nearly the same process but we use the probability output to adjust our model</div>
+		<div class="medium">we pick a random position in the training corpus and attempt to predict the next token</div>
+		<div class="medium">the correct one is known and in a perfectly trained model its probability would be 1 while all other are 0</div>
+		<div class="medium">we find the difference and use it to increase the weight for the correct word and decrease the others</div>
+		<div class="medium">this update is propogated back through the model and the input embeddings are adjusted as well</div>
+		<br>
+		<div class="medium">repeat a million times and predictions steadily get better and better</div><br>
+		<div class="medium"><strong>sample error / iteration:</strong></div>
+		<img src="images/graph.png" style="max-width: 40vw"><br>
+      </section><hr class="break">
+      <br><br><br><br>
+
+      <section id="limitations">
+        <strong class="large">Behavior and Limitations</strong><br><br>
+		<div class="medium">our model is tiny and limited so while our math is sound, we have not created GPT...</div><br>
+		<div class="medium"><em>"they would feast feast feast feast feast feast feast feast feast feast feast feast feast..."</em> - model</div><br>
+		<div class="medium"><strong>short term memory only</strong> - predictions are based on only recent tokens, the model cannot stay on task or maintain a theme</div>
+		<div class="medium"><strong>word order doesnt matter</strong> - in a context, embeddings are summed regardless of position, "hop on pop" = "pop on hop"</div>
+		<div class="medium"><strong>common words are too common</strong> - common words and phrases have high bias and the model has no concept of "already said that"</div>
+		<div class="medium"><strong>model only learns basic patterns</strong> - at this scale our model is picking up correlations in text, not actual rules or facts</div><br>
+		<!--<img src="images/dumb-wojak.png" style="max-width: 40vw"><br>-->
+		<div class="medium">but despite its limitations, the model does learn basic structure and produces sensible text</div><br>
+		<img src="images/chad.png" style="max-width: 40vw"><br>
+		<div class="small">(no punctuation model with 8 token context trained to ~2m iterations)</div><br>
+
+      </section><hr class="break">
+      <br><br><br><br>
+
+      <section id="real-llm">
+        <strong class="large">How Far Are We From A Real LLM?</strong><br><br>
+		<div class="medium">conceptually not far at all! implementation wise, kinda far...</div><br>
+		<div class="medium">the innovation that powers modern LLMs is <strong>attention</strong>, a mechanism that allows the model to dynamically create and weight its context</div>
+		<div class="medium">models today also take advantage of numerous layers in order to create stronger more accurate relations</div>
+		<div class="medium">the training data and vocab size must scale massively, our model has a vocab of ~1k, GPT-2 has ~50k</div>
+		<div class="medium">to manage their scale real LLMs use <strong>transformers</strong> which allow for efficient matrix computations and parallelism</div><br>
+		<div class="medium">no key ideas change between our model and GPT, but the scale is not even comparable</div>
+		<div class="medium">GPT-4 is rumored to have over a trillion parameters, we have ~50k (20 million times smaller)</div><br>
+      </section><hr class="break">
+      <br><br><br><br>
+
+      <section id="implementation">
+        <strong class="large">Implementation</strong><br><br>
+        <div class="medium">everything is written in C, using only standard libraries</div>
+		<div class="medium">
+			<a style="color: blue;" href="project/train.c"><code>train.c</code></a> 
+			and 
+			<a style="color: blue;" href="project/generate.c"><code>generate.c</code></a> 
+			both include 
+			<a style="color: blue;" href="project/includes.c"><code>includes.c</code></a>
+		</div><br>
+		<div class="medium">they are all totally cross platform and need no linking</div>
+		<div class="medium">just run "<code>gcc train.c</code>" or "<code>gcc generate.c</code>"</div><br>
+
+		<div class="medium">Core Structures</div>
+		<img src="images/structs.png" style="max-width: 40vw"><br><br>
+		<div class="medium">we initialize and save using the following functions:</div>
+		<img src="images/functions.png" style="max-width: 40vw"><br><br>
+		<div class="medium">training and generation follow the same forward pass to produce probability distribution</div>
+		<img src="images/forward-pass.png" style="max-width: 40vw"><br>
+		<div class="medium"><strong>math notes:</strong><br>
+			tanh is a good function to bound hidden values since when features are very close to 1/-1, pushing them farther has little effect</div>
+		<div class="medium">softmax considers an entire list of values and proportionally converts them to probabilities (adding to exactly 1)</div>
+		<div style="display:flex; justify-content:center; gap:10px">
+			<div style="align-items:center"><div class="small">tanh</div><img src="images/tanh.png" style="max-height: 20vh"></div>
+			<div style="align-items:center"><div class="small">softmax</div><img src="images/softmax.png" style="max-height: 20vh"></div>
+		</div>
+
+		<br>
+		<div class="medium">at this point, generation can just sample the distribution, update the context and move on</div>
+		<img src="images/gen-implementation.png" style="max-width: 40vw"><br><br>
+		<div class="medium">training must calculate loss, then attribute blame and update weights</div>
+		<img src="images/train-implementation.png" style="max-width: 40vw"><br>
+		<div class="medium">comments explain but, i highly recommend <a style="color:blue" href="https://cs231n.github.io/linear-classify/">this resource from Stanford</a> if you want to understand the calculus here</div><br>
+		<div class="medium">the cool thing about this implementation is that there are less than 500 lines of C between training, generation, and helpers</div>
+		<div class="medium">the point is to demonstrate the most basic machinery powering modern language models and show that there is no magic</div>
+
+      </section><hr class="break">
+      <br><br><br><br>
+
+	  <section id="examples">
+        <strong class="large">Example Outputs</strong><br><br>
+
+        <div class="medium">to get outputs of your own, compile and run the training, then compile and run the generation.</div>
+        <div class="medium">adjust the constants for temperature, context, learning rate, steps, hidden size, or even the corpus text</div><br>
+        <div class="medium">many outputs will be complete and total nonsense, the following are a selection of unaltered examples...</div>
+		<div class="medium">the generation executable allows you to seed a context, i will tell you the seed and model details for each</div><br><br>
+
+		<div class="medium"><strong>1.</strong> 0.7 temperature, 4 token context, 1 million training steps, seed: "i do not like green eggs and ham"</div><br>
+		<div class="medium"><em>i do not like them in a house and i will eat them in a box and i will eat them with a fox i will not eat them on a train not not in a car you let me be i would not could not in a car you let me be i do not like them sam you see not i like them here and they say i will don't choose to go there with your head full of brains and your shoes full of there tricks and i eat them run in a d tree not in a car you let</em></div><br><br>
+
+		<div class="medium"><strong>2.</strong> 0.4 temperature, 4 token context, 5 million training steps, seed: "oh the places you'll go"</div><br>
+		<div class="medium"><em>oh the places you'll go by dr seuss congratulations today is your day your mountain is waiting so get on your way did you hear and a guy oh the places you'll go there is fun to be done there are points to be won and the magical things you can do with that ball will make you the winning est winner of all fame you'll be as famous as famous can be with the whole wide world watching you win on except except when you don't because sometimes you won't i'm sorry to say so but sadly it's true that bang ups and</em></div><br><br>
+
+		<div class="medium"><strong>3.</strong> 0.2 temperature, 4 token context, 1 million training steps, seed: "the cat in the"</div><br>
+		<div class="medium"><em>the cat in the hat by dr seuss the sun did not shine it was too wet to play so we sat in the house all that cold cold wet day i sat there with sally we sat there we two and i said how i do you would not like them here or there i do not like them here or there i do not like them with a mouse i do not like them with a mouse i do not like them here or there i do not like them here or there i do not like them with a fox not</em></div><br><br>
+
+		<div class="medium">the following use an alternate tokenizer which allows for punctuation</div><br><br>
+
+		<div class="medium"><strong>4.</strong> 0.6 temperature, 8 token context, 1 million training steps, seed: "fox in socks"</div><br>
+		<div class="medium"><em> sews in eat a a car box.<br>
+				knox fox in the box socks. on<br>
+				box hook. knox. the<br>
+				<br>
+				in box box yellow. knox socks<br>
+				<br>
+				box knox in box.<br>
+				sue now. sews slow slow joe joe<br>
+				crow whose clothes?<br>
+				sews<br>
+				<br>
+				you sue in sue joe box sue on.<br>
+				slow sews<br>
+				knox in box<br>
+				sue sue socks. now sews of slow<br>
+				slow<br>
+				joe who<br>
+			</em></div><br><br>
+
+		<div class="medium"><strong>5.</strong> 0.9 temperature, 6 token context, 250k training steps, seed: "we like our bike"</div><br>
+		<div class="medium"><em>on bricks chicks and chicks with clocks.<br>
+				<br>
+				sir. mr. mr. brown brown brown<br>
+				down came down with the a.<br>
+				grinch lot of of who something bed new new.<br>
+				things in socks<br>
+				<br>
+				box socks on knox knox in. box<br>
+				in a socks socks. fox on on<br>
+				knox in in house a box.<br>
+				i like to box box it.<br>
+				how i can hold up you hold!<br>
+				and a toy toy<br>
+				little<br>
+			</em></div><br><br>
+
+		<div class="medium"><strong>6.</strong> 0.5 temperature, 4 token context, untrained, seed: "the grinch's small heart grew three sizes that day"</div><br>
+		<div class="medium"><em>as by am isn't bat picked boys seven high boat light max hump hold freeze lived<br>
+				jumps sounded and freeze lay onward make whether? fifty claus lakes thread cindy-lou they'll show feet call hops again hop lie you're already merry slump caught whose cindy-lou fish? feel pets couldn't not walls deft mot afraid curls lie opener mountains hated hang bottle sam simple hold sleigh puzzler tricycles congratulations hello look isn't tame quarters smile run everywhere hop first another streets hello blocks play chew bottled horn whether best full hanging left caught win streets sits scarce bicycles mother hop</em></div><br><br>
+
+      </section><hr class="break">
+      <br><br><br><br>
+
+      <section id="thank-you">
+		  <strong class="large">Thank You For Listening!</strong><br><br>
+		  <div class="medium">i hope this presentation clarifies some concepts and buzz around language models</div>
+		  <div class="medium">all code and presentation materials are written by <a style="color: blue;" href="https://ryanhub.org/ryan-alport">Ryan Alport</a></div>
+		  <div class="medium">please reach out to <a style="text-decoration:underline;color: black;">Ralport2005@gmail.com</a> with any questions at all!</div><br>
+
+		  <div class="medium"><a style="color: blue;" href="https://www.ryanhub.org/repos/baby-lm.git/">code</a></div>
+		  <div class="medium"><a style="color: blue;" href="../../index.php">club home</a></div>
+      </section><hr class="break">
+      <br><br><br><br>
+
+      <section id="resources">
+        <strong class="large">Resources</strong><br>
+		<a class="medium" style="color: blue;" href="https://huggingface.co/spaces/hesamation/primer-llm-embedding">embeddings - huggingface</a><br>
+		<a class="medium" style="color: blue;" href="https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf">"Attention Is All You Need" - Vaswani et al.</a><br>
+		<a class="medium" style="color: blue;" href="https://github.com/openai/gpt-2/blob/master/model_card.md">GPT-2 model card</a><br>
+		<a class="medium" style="color: blue;" href="https://cs231n.github.io/linear-classify/">Stanford CS231n - Deep Learning for Computer Vision</a><br>
+		<a class="medium" style="color: blue;" href="youtube.com/watch?v=LPZh9BOjkQs&pp=2AbJAg%3D%3D">video - llm basics - 3b1b</a><br>
+		<a class="medium" style="color: blue;" href="https://www.youtube.com/watch?v=kCc8FmEb1nY&pp=ygUaaW1wbGVtZW50IGdwdCBmcm9tIHNjcmF0Y2jYBs8k">video - implementing gpt - Andrej Karpathy</a><br>
+		<a class="medium" style="color: blue;" href="https://web.mit.edu/6.454/www/www_fall_2003/gew/CEtutorial.pdf">"A Tutorial on the Cross-Entropy Method" - Pieter-Tjerk de Boer</a><br>
+      </section><hr class="break">
+      <br><br><br><br>
+
+	</div>
+    <hr class="break">
+
+  </div>
+</body>
+</html>
