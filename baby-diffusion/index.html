@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="IHEARTCOMPUTER">
+  <title>IHEARTCOMPUTER</title>
+  <link rel="icon" type="image/x-icon" href="../../logo.png">
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+	section {
+		max-width: 80vw;
+	}
+  </style>
+</head>
+<body>
+  <div class="main">
+    <header class="header">
+      <div class="title">
+        <strong class="large" style="align-self: flex-start;">I<span style="color: #e00;">♥</span>COMPUTER</strong>
+      </div>
+      <nav class="nav">
+        <a class="link" href="/">home</a>
+        <a class="link" href="https://discord.gg/JpRw84Ybwg" target="_blank">discord</a>
+        <a class="link" href="projects/">projects</a>
+      </nav>
+    </header>
+
+    <hr class="break">
+
+    <div class="content">
+		
+    <section id="title">
+      <strong class="large">AI Image Generation</strong><br><br>
+      <div class="medium">building a simple autoencoder from scratch in C</div><br>
+		<div style="display: flex; flex-direction: row; justify-content: center;">
+			  <img src="images/freak1.bmp" style="width: 10vw"><br><br>
+			  <img src="images/freak2.bmp" style="width: 10vw"><br><br>
+			  <img src="images/freak3.bmp" style="width: 10vw"><br><br>
+			  <img src="images/freak4.bmp" style="width: 10vw"><br><br>
+		</div>
+		<div style="display: flex; flex-direction: row; justify-content: center;">
+			  <img src="images/freak5.bmp" style="width: 10vw"><br><br>
+			  <img src="images/freak6.bmp" style="width: 10vw"><br><br>
+			  <img src="images/freak7.bmp" style="width: 10vw"><br><br>
+			  <img src="images/freak8.bmp" style="width: 10vw"><br><br>
+		  </div>
+		<div style="display: flex; flex-direction: row; justify-content: center;">
+			  <img src="images/freak9.bmp" style="width: 10vw"><br><br>
+			  <img src="images/freak10.bmp" style="width: 10vw"><br><br>
+			  <img src="images/freak11.bmp" style="width: 10vw"><br><br>
+			  <img src="images/freak12.bmp" style="width: 10vw"><br><br>
+		</div><br>
+	  	  <div class="medium">by <a href="https://ryanhub.org/ryan-alport" style="color: blue;">Ryan Alport</a></div>
+    </section><hr class="break">
+    <br><br><br><br>
+
+    <section id="goals">
+		<strong class="large">what are we doing today?</strong><br><br>
+	  <div class="medium">1. teach a computer to compress an image into a "meaningful" numerical representation</div><br>
+	  <div class="medium">2. explore the geometry of the space learned by our model</div><br>
+	  <div class="medium">3. generate new, never before see emojis with some cool javascript tools</div><br>
+	  <div class="medium">4. consider how big time image generation builds off of these ideas</div><br>
+
+	</section><hr class="break">
+    <br><br><br><br>
+
+    <section id="how">
+		<strong class="large">the big question...</strong><br><br>
+		<img src="images/pixels.png" style="max-width: 40vw"><br><br>
+		<div class="medium">we know that any given RGB image can be represented as:<br>
+			<i>width * height * 3</i> floating point numbers</div><br>
+		<div class="medium">but those raw pixel values dont really tell us anything...</div><br>
+		<div class="medium">so how does a model learn to extract colors, shapes, or general structures from images?</div><br>
+	</section><hr class="break">
+    <br><br><br><br>
+
+    <section id="encode-decode">
+		<strong class="large">encoding, decoding, reconstruction</strong><br><br>
+		<div class="medium">the place to start is to train a model to see an image, compress it into a single vector, then decompress that vector into the same image</div><br>
+		<div class="medium">we can evaluate how good the model is by comparing the before and after images, pixel by pixel (MSE to be precise)</div><br>
+		<img src="images/encode-decode-reconstruct.png" style="max-width: 60vw">
+		<div class="small">(real reconstructed image by our model)</div><br><br>
+
+		<div class="medium">we compute how much each weight contributed to the error, this is the <strong>gradient</strong>.</div><br>
+		<div class="medium">then we move each weight in the opposite direction of the error:</div>
+		<div class="medium"><i>weight = weight − learning_rate × gradient</i></div><br>
+
+		<div class="medium">this process is called <strong>backpropagation</strong>, errors flows backward through the network, slowly aproaching "correct" values</div> 
+	</section><hr class="break">
+    <br><br><br><br>
+
+    <section id="latent-space">
+		<strong class="large">we can reconstruct images, so what?</strong><br><br>
+		<div class="medium">while image reconstruction is cool, it doesnt seem immediately useful, and for us its not...</div><br>
+		<div class="medium">what we are really concerned about is the compressed vector the model creates, we call it <strong>the latent</strong></div><br>
+		<div class="medium">the reason it is so useful is because <i>in well trained models</i>, actual features are encoded into this vector</div><br>
+		<div class="medium">similar images have similar latent vectors, evidencing that we have created an "image space" which we may now explore...</div><br>
+		<img src="images/latent-visual.png" style="max-width: 60vw">
+		<div class="small">(visualization by Zhang (2017) - Deep Unsupervised Clustering Using Mixture of Autoencoders)</div><br><br>
+    </section><hr class="break">
+    <br><br><br><br>
+
+    <section id="generating">
+      <strong class="large">ways to interact with the latent space</strong><br><br>
+	  <div class="medium">we can now create entirely new vectors, either at specific points or random ones, and decode them to see where they take us</div><br><br>
+      <strong class="large">random latent</strong>
+		<div class="medium">completely random latent vectors dont usually make sense</div><br>
+		<div style="display: flex; flex-direction: row; justify-content: center;">
+			  <img src="images/random1.bmp" style="width: 10vw"><br><br>
+			  <img src="images/random2.bmp" style="width: 10vw"><br><br>
+			  <img src="images/random3.bmp" style="width: 10vw"><br><br>
+			  <img src="images/random4.bmp" style="width: 10vw"><br><br>
+		</div><br><br>
+      <strong class="large">latent sample</strong><br>
+		<div class="medium">we can sample from the distribution of latent values to get slightly better</div><br>
+		<div style="display: flex; flex-direction: row; justify-content: center;">
+			  <img src="images/avg-latent1.bmp" style="width: 10vw"><br><br>
+			  <img src="images/avg-latent2.bmp" style="width: 10vw"><br><br>
+			  <img src="images/avg-latent3.bmp" style="width: 10vw"><br><br>
+			  <img src="images/avg-latent4.bmp" style="width: 10vw"><br><br>
+		</div><br><br>
+      <strong class="large">known latent + noise</strong><br>
+		<div class="medium">even easier we can just decode known images and add random noise to the latent</div><br>
+		<div style="display: flex; flex-direction: row; justify-content: center;">
+			  <img src="images/known-plus-noise1.bmp" style="width: 10vw"><br><br>
+			  <img src="images/known-plus-noise2.bmp" style="width: 10vw"><br><br>
+			  <img src="images/known-plus-noise3.bmp" style="width: 10vw"><br><br>
+			  <img src="images/known-plus-noise4.bmp" style="width: 10vw"><br><br>
+		</div><br><br>
+      <strong class="large">interpolation</strong><br><br>
+		<div class="medium">we can also add, subtract, or smoothly move between two or more images</div><br>
+		<div style="display: flex; flex-direction: row; justify-content: center;">
+			  <img src="images/interpolation1.bmp" style="width: 10vw"><br><br>
+			  <img src="images/interpolation2.bmp" style="width: 10vw"><br><br>
+			  <img src="images/interpolation3.bmp" style="width: 10vw"><br><br>
+			  <img src="images/interpolation4.bmp" style="width: 10vw"><br><br>
+			  <img src="images/interpolation5.bmp" style="width: 10vw"><br><br>
+			  <img src="images/interpolation6.bmp" style="width: 10vw"><br><br>
+			  <img src="images/interpolation7.bmp" style="width: 10vw"><br><br>
+		</div><br><br>
+      <strong class="large">PCA manipulation</strong><br><br>
+		<div class="medium">I have used an algorithm to extract the latent dimensions with the highest deviations, these may be considered the principal axes</div><br>
+		<div class="medium">this javascript tool allows you to edit those and see the decoded values live</div><br>
+	  <div>
+		<label>Emoji:
+		<select id="emojiSelect"></select>
+		</label>
+	  </div>
+	  <canvas id="canvas" style="border:1px solid #000"></canvas>
+	  <div id="sliders"></div>
+	  <script src="gen.js"></script> 
+		  
+    </section><hr class="break">
+    <br><br><br><br>
+
+    <section id="">
+    </section><hr class="break">
+    <br><br><br><br>
+
+	</div>
+    <hr class="break">
+
+  </div>
+</body>
+</html>
