@@ -154,6 +154,19 @@
     </section><hr class="break">
     <br><br><br><br>
 
+	<section id="implementation">
+		<strong class="large">brief implementation overview</strong><br><br>
+		<div class="medium">everything is written in C, from scratch, with no libraries...</div><br>
+		<div class="medium">training the model requires only 2 files and less than 300 lines of code!</div>
+		<div class="medium">image generation, depending on the method, is on average ~50 lines</div><br>
+		<img src="images/structs.png" style="width: 40vw"><div class="small">these are the main structs of interest, they are retrived from or written to binary files</div><br><br>
+		<img src="images/forward.png" style="width: 40vw"><div class="small">these functions constitute the entire forward phase, very nice and easy</div><br><br>
+		<img src="images/train1.png" style="width: 40vw"><br><img src="images/train2.png" style="width: 40vw"><div class="small">training is heavy on calculus but simplifies nicely, it is a total of exactly 100 lines</div><br><br>
+		<div class="medium"></div><br>
+
+	</section><hr class="break">
+	<br><br><br><br>
+
     <section id="whats-next">
       <strong class="large">behaviors and limits</strong><br><br>
 		<div class="medium">this is a very small model with clear strengths and weaknesses</div><br>
