@@ -59,7 +59,7 @@
 		<strong class="large">what are we doing today?</strong><br><br>
 	  <div class="medium">1. teach a computer to compress an image into a "meaningful" numerical representation</div><br>
 	  <div class="medium">2. explore the geometry of the space learned by our model</div><br>
-	  <div class="medium">3. generate new, never before see emojis with some cool javascript tools</div><br>
+	  <div class="medium">3. generate new, never before seen emojis with some cool javascript tools</div><br>
 	  <div class="medium">4. consider how big time image generation builds off of these ideas</div><br>
 
 	</section><hr class="break">
@@ -77,7 +77,7 @@
 
     <section id="encode-decode">
 		<strong class="large">encoding, decoding, reconstruction</strong><br><br>
-		<div class="medium">the place to start is to train a model to see an image, compress it into a single vector, then decompress that vector into the same image</div><br>
+		<div class="medium">the approach of autoencoding is to train a model to see an image, compress it into a single vector, then decompress that vector into the same image</div><br>
 		<div class="medium">we can evaluate how good the model is by comparing the before and after images, pixel by pixel (MSE to be precise)</div><br>
 		<img src="images/encode-decode-reconstruct.png" style="max-width: 60vw">
 		<div class="small">(real reconstructed image by our model)</div><br><br>
@@ -86,7 +86,7 @@
 		<div class="medium">then we move each weight in the opposite direction of the error:</div>
 		<div class="medium"><i>weight = weight − learning_rate × gradient</i></div><br>
 
-		<div class="medium">this process is called <strong>backpropagation</strong>, errors flows backward through the network, slowly aproaching "correct" values</div> 
+		<div class="medium">this process is called <strong>backpropagation</strong>, errors flow backward through the network, the weights slowly approaching "correct" values</div> 
 	</section><hr class="break">
     <br><br><br><br>
 
@@ -105,7 +105,7 @@
       <strong class="large">ways to interact with the latent space</strong><br><br>
 	  <div class="medium">we can now create entirely new vectors, either at specific points or random ones, and decode them to see where they take us</div><br><br>
       <strong class="large">random latent</strong>
-		<div class="medium">completely random latent vectors dont usually make sense</div><br>
+		<div class="medium">completely random latent vectors dont always have a feasible representation</div><br>
 		<div style="display: flex; flex-direction: row; justify-content: center;">
 			  <img src="images/random1.bmp" style="width: 10vw"><br><br>
 			  <img src="images/random2.bmp" style="width: 10vw"><br><br>
@@ -113,7 +113,7 @@
 			  <img src="images/random4.bmp" style="width: 10vw"><br><br>
 		</div><br><br>
       <strong class="large">latent sample</strong><br>
-		<div class="medium">we can sample from the distribution of latent values to get slightly better</div><br>
+		<div class="medium">we can sample from the distribution of latent values to get more sensible outputs</div><br>
 		<div style="display: flex; flex-direction: row; justify-content: center;">
 			  <img src="images/avg-latent1.bmp" style="width: 10vw"><br><br>
 			  <img src="images/avg-latent2.bmp" style="width: 10vw"><br><br>
@@ -140,23 +140,88 @@
 			  <img src="images/interpolation7.bmp" style="width: 10vw"><br><br>
 		</div><br><br>
       <strong class="large">PCA manipulation</strong><br><br>
-		<div class="medium">I have used an algorithm to extract the latent dimensions with the highest deviations, these may be considered the principal axes</div><br>
-		<div class="medium">this javascript tool allows you to edit those and see the decoded values live</div><br>
+		<div class="medium">principal component analysis allows us to determine which values in the latent correspond to large visable changes</div><br>
+		<div class="medium">this javascript tool allows you to edit those values and see the decoded images live</div><br>
 	  <div>
 		<label>Emoji:
 		<select id="emojiSelect"></select>
 		</label>
 	  </div>
-	  <canvas id="canvas" style="border:1px solid #000"></canvas>
-	  <div id="sliders"></div>
+	  <canvas id="canvas" style="justify-self: center; max-width: 70vw; border:1px solid #000"></canvas>
+	  <div id="sliders" style="justify-self: center; max-width: 60vw;"></div>
 	  <script src="gen.js"></script> 
 		  
     </section><hr class="break">
     <br><br><br><br>
 
-    <section id="">
+    <section id="whats-next">
+      <strong class="large">behaviors and limits</strong><br><br>
+		<div class="medium">this is a very small model with clear strengths and weaknesses</div><br>
+		<br><img src="images/chad-virgin.png" style="width: 70vw"><div class="small">(our model vs DALL-E)</div><br><br>
+		<div class="medium"><strong>small model, small dataset</strong> - the face only model is trained on 97 unique 32x32 images and it contains just over 3 million parameters. the CLIP image encoder, used by DALL-E and Stable Diffusion has 100x the parameters and a training set of potentially billions</div><br>
+		<div class="medium"><strong>shallow connections</strong> - our model technically only has two layers, linear encoder, and linear decoder. <br>
+		<i>image → L → latent → L → image</i><br>
+		a more advanced model would contain more intermediate layers where more abstract features could be learned<br>
+		<i>image → L → .. → L → latent → L → .. → L → image</i><br>
+		</div><br>
+		<div class="medium"><strong>the latent space is not continuous</strong> - we cannot gaurentee that any given point has a sensible representation, this is why random values for the latent decode to nonsense</div><br>
+		<div class="medium"><strong>pixel-wise loss function</strong> - mean squared error is just ok, in cases where multiple things are possible, the model tends towards blur or grey as it reaches for the average, in general our model doesnt have a truly generative goal<br>
+		<br><img src="images/chad-angry.png" style="width: 70vw"><div class="small">(DALL-E engineers vs Ryan Alport)</div><br><br>
     </section><hr class="break">
     <br><br><br><br>
+
+	<section id="improvements">
+		<strong class="large">improvements to be made</strong><br><br>
+		<div class="medium">the main upgrade to be made is the conversion to a <strong>variational autoencoder</strong> (VAE), this change in architecture forces structure into the latent space, meaning we can sample any point and get something nice.</div><br>
+		<img src="images/vae.png" style="width: 70vw"><div class="small">(A continuous space of faces generated by Tom White using VAEs)</div><br><br>
+		<div class="medium">we could also speed up training and generation(meaning we could realistically use more parameters!) using hardware like the GPU or even simple multithreading</div><br>
+		<div class="medium">it would also be "trivial" to add text to image generation, see <a href="/projects/baby-lm">last week's demo</a> for how we turn words into vectors, but we can write an encoder to map those vectors to images<br>potential topic of later meeting...</div><br>
+		<div class="medium"></div><br>
+
+	</section><hr class="break">
+	<br><br><br><br>
+
+	<section id="other-ways">
+		<strong class="large">what other ways can we generate images?</strong><br><br>
+		<div class="medium"><strong>diffusion</strong> is a very popular method for image generation where images start as ppure noise and the model gradually removes until a coherenet image emerges. they are trained by adding noise to real images and teaching the model to reverse the process</div><br>
+		<div class="medium"><strong>generative adversarial networks</strong> (GANs) are a framework which uses adversarial training to produce realistic images. training consists of two models, one generates images while the other tries to determine if those images are authentic. the generator converges to be able to fool the discriminator.</div><br>
+		<div class="medium"><strong class="medium">autoregressive models</strong> generate images one piece at a time, predicting the next pixel or token based on what has already been generated.</div><br>
+	<div style="display: flex; flex-direction: row; justify-self: center;">
+		<div>
+			<img src="images/diff-sample.png" style="max-height: 20vw">
+			<div class="small">diffusion sample</div>
+		</div>
+		<div>
+			<img src="images/gan-sample.png" style="max-height: 20vw">
+			<div class="small">GAN sample</div>
+		</div>
+		<div>
+			<img src="images/autoreg-sample.png" style="max-height: 20vw">
+			<div class="small">autoregressive sample</div>
+		</div>
+	</div>
+
+	</section><hr class="break">
+    <br><br><br><br>
+
+    <section id="thank-you">
+	  <strong class="large">Thank You For Listening!</strong><br><br>
+	  <div class="medium">all code and presentation materials are written by Ryan Alport</div>
+	  <div class="medium">please reach out to <a style="text-decoration:underline;color: black;">Ralport2005@gmail.com</a> with any questions</div><br>
+	  <div class="medium"><a style="color: blue;" href="https://www.ryanhub.org/repos/baby-image-gen.git/">code</a></div>
+	  <div class="medium"><a style="color: blue;" href="/">club home</a></div>
+      </section><hr class="break">
+      <br><br><br><br>
+
+	<section id="resources">
+		<strong class="large">Resources</strong><br>
+		<a class="medium" style="color: blue;" href="https://gaussian37.github.io/deep-learning-chollet-8-4/">VAE image generation - Jinsol Kim</a><br>
+		<a class="medium" style="color: blue;" href="https://introduction-to-autoencoders.vercel.app/">intro to autoencoders - Donald R. Bertucci</a><br>
+		<a class="medium" style="color: blue;" href="https://youtu.be/qJeaCHQ1k2w?si=dcGXs4RkwsDEMPvv">variational autoencoders animated - Deepia video</a><br>
+		<a class="medium" style="color: blue;" href="https://youtu.be/pj9-rr1wDhM?si=z7yyltJdsj-2G2l9">CNN visualized - Futurology video</a><br>
+		<a class="medium" style="color: blue;" href="https://youtu.be/-lz30by8-sU?si=7_ThHVALrqK9Ha2B">stable diffusion in code - Computerphile video</a><br>
+		<br><br><br><br>
+	</section>
 
 	</div>
     <hr class="break">
