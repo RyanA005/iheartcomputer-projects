@@ -140,7 +140,7 @@
 			  <img src="images/interpolation7.bmp" style="width: 10vw"><br><br>
 		</div><br><br>
       <strong class="large">PCA manipulation</strong><br><br>
-		<div class="medium">principal component analysis allows us to determine which values in the latent correspond to large visable changes</div><br>
+		<div class="medium">principal component analysis allows us to determine which values in the latent correspond to large visible changes</div><br>
 		<div class="medium">this javascript tool allows you to edit those values and see the decoded images live</div><br>
 	  <div>
 		<label>Emoji:
@@ -164,7 +164,7 @@
 		a more advanced model would contain more intermediate layers where more abstract features could be learned<br>
 		<i>image → L → .. → L → latent → L → .. → L → image</i><br>
 		</div><br>
-		<div class="medium"><strong>the latent space is not continuous</strong> - we cannot gaurentee that any given point has a sensible representation, this is why random values for the latent decode to nonsense</div><br>
+		<div class="medium"><strong>the latent space is not continuous</strong> - we cannot guarentee that any given point has a sensible representation, this is why random values for the latent decode to nonsense</div><br>
 		<div class="medium"><strong>pixel-wise loss function</strong> - mean squared error is just ok, in cases where multiple things are possible, the model tends towards blur or grey as it reaches for the average, in general our model doesnt have a truly generative goal<br>
 		<br><img src="images/chad-angry.png" style="width: 70vw"><div class="small">(DALL-E engineers vs Ryan Alport)</div><br><br>
     </section><hr class="break">
@@ -183,7 +183,7 @@
 
 	<section id="other-ways">
 		<strong class="large">what other ways can we generate images?</strong><br><br>
-		<div class="medium"><strong>diffusion</strong> is a very popular method for image generation where images start as ppure noise and the model gradually removes until a coherenet image emerges. they are trained by adding noise to real images and teaching the model to reverse the process</div><br>
+		<div class="medium"><strong>diffusion</strong> is a very popular method for image generation where images start as pure noise which the model gradually removes until a coherenet image emerges. they are trained by adding noise to real images and teaching the model to reverse the process</div><br>
 		<div class="medium"><strong>generative adversarial networks</strong> (GANs) are a framework which uses adversarial training to produce realistic images. training consists of two models, one generates images while the other tries to determine if those images are authentic. the generator converges to be able to fool the discriminator.</div><br>
 		<div class="medium"><strong class="medium">autoregressive models</strong> generate images one piece at a time, predicting the next pixel or token based on what has already been generated.</div><br>
 	<div style="display: flex; flex-direction: row; justify-self: center;">
@@ -196,7 +196,7 @@
 			<div class="small">GAN sample</div>
 		</div>
 		<div>
-			<img src="images/autoreg-sample.png" style="max-height: 20vw">
+			<img src="images/autoreg-sample.png" style="height: 20vw">
 			<div class="small">autoregressive sample</div>
 		</div>
 	</div>

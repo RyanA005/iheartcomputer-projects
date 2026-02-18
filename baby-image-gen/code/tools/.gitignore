@@ -1,0 +1,8 @@
+**/images/**
+**/GENERATED/**
+**/TRAINED/**
+
+**.exe
+**.out
+**.bmp
+**.bin
