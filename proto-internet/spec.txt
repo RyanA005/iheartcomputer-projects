@@ -1,0 +1,27 @@
+IHCTP (IHeartComputer Transport Protocol)
+v0.1
+
+Runs over TCP on port 6700.
+Text protocol (UTF-8).
+
+--------------------------
+REQUEST
+--------------------------
+GIVE <filename>\n
+
+--------------------------
+RESPONSE
+--------------------------
+FINE <data>\n
+ERRO <msg>\n
+
+--------------------------
+.ihc/.ihx FILES
+--------------------------
+TITLE: My Page
+TEXT: welcome to clubnet
+LINK: projects -> projects.ihc
+LINK: demo -> demo.ihx
+
+.ihc are static
+.ihx are python which return .ihc
