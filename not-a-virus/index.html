@@ -25,40 +25,134 @@
     <div class="content">
 
       <section id="title">
-        <strong class="large">How NOT To Write Computer Viruses</strong><br><br>
-        <div class="medium">examining the implementation and propogation of malware</div><br>
+        <strong class="large">NOT How To Write Computer Viruses...</strong><br><br>
+        <div class="medium">safely examining the implementation and propagation of malware</div><br>
+        <img src="images/download.png" style="max-width: 50vw"><br><br>
+        <div class="small">(by reading you promise to use this info responsibly and assume all consequences for misuse)</div><br>
       <div class="medium">by <a href="https://ryanhub.org/me" style="color: blue;">Ryan Alport</a></div>
       </section><hr class="break">
       <br><br><br><br>
 
       <section id="goals">
         <strong class="large">goals</strong><br><br>
-        <img src="" style="max-width: 40vw"><br><br>
-        <div class="medium"></div><br>
+		<div class="medium"><strong>1. </strong>define malware and look at common types</div><br>
+		<div class="medium"><strong>2. </strong>explain common attack vectors and vulnerabilities</div><br>
+		<div class="medium"><strong>3. </strong>high level overview of how <i>hypothetical</i> payloads work</div><br>
+		<div class="medium"><strong>4. </strong>run and explain our own custom malware*</div><br>
+		<div class="medium"><strong>5. </strong>not get kicked out of school or sent to jail</div><br>
       </section><hr class="break">
       <br><br><br><br>
 
-      <section id="">
-        <strong class="large">section-x</strong><br><br>
-        <img src="" style="max-width: 40vw"><br><br>
-        <div class="medium"></div><br>
+      <section id="what-is-malware">
+        <strong class="large">what is malware?</strong><br><br>
+    <div class="medium">malware is just software that does something malicious</div><br>
+        <img src="images/types.png" style="max-width: 40vw"><br><br>
+    <div class="medium">malware often pretends to be something its not, steals data, alters files, or denies access</div>
+		<div class="medium">it is very common that it tries to become persistent on a machine or spread to others</div><br>
+
+		<div class="medium"><strong>$16.6 billion</strong> lost due to cyber attacks in 2024 - FBI IC3</div>
+		<div class="medium"><strong>+1 billion</strong> unique pieces of malware identified since 1984 - AV-TEST Institute</div>
+		<div class="medium"><strong>~10 million</strong> devices with data-stealing malware identified in 2023 - Kaspersky</div><br>
+      </section><hr class="break">
+      <br><br><br><br>
+
+      <section id="spreading-malware">
+        <strong class="large">how does malware spread?</strong><br><br>
+    <div class="medium">most malware is intentionally installed and run by users</div><br>
+    <div class="medium">phishing links</div>
+    <div class="medium">fake downloads</div>
+    <div class="medium">email attachments</div>
+		<div class="medium">free software installs</div><br><br>
+
+		<div class="medium">exploiting systems themselves is much harder but exploits exist</div><br>
+		<div class="medium">compromised dependencies</div>
+		<div class="medium">low level memory manipulation</div>
+		<div class="medium">logic errors</div><br><br>
+
+		<div class="medium">there is even concern of physical attacks</div><br>
+		<div class="medium">leaving computers signed in</div>
+		<div class="medium">inserting malicious devices</div>
+		<div class="medium">modifying hardware</div><br><br>
+
+        <img src="images/vectors.png" style="max-width: 40vw"><br><br>
+
+		<div class="medium">in all cases, the idea is to get arbitrary code running on the target machine</div>
+		<div class="medium">once we can do that, we can do literally anything</div><br>
+    <div class="medium">we can propagate spam emails</div>
+		<div class="medium">we can look for devices on the network</div>
+		<div class="medium">we can steal credentials</div>
+		<div class="medium">we can copy data to a server</div>
+		<div class="medium">we can lock or encrypt files</div>
+		<div class="medium">we can modify system details</div>
+		<div class="medium">we can open remote shells</div>
+		<div class="medium">we can install and run more malware</div>
+		<div class="medium">we can just plain destroy the computer</div>
+
+      </section><hr class="break">
+      <br><br><br><br>
+
+      <section id="examples">
+        <strong class="large">people fall for these constantly</strong><br><br>
+		<div class="medium">your boss sends you what looks like a pdf but is really a malware executable</div>
+        <img src="images/fake-email.png" style="max-width: 40vw"><br>
+        <img src="images/fake-pdf.png" style="max-width: 40vw"><br>
+		<img src="images/fake-pdf-output.png" style="max-width: 40vw"><br><br>
+		<div class="medium">a normal looking download installs an executable or bad installer</div>
+		<img src="images/fake-download.png" style="max-width: 40vw"><br><br>
+		<div class="medium">a document you want to view prompts you to run a script</div>
+        <img src="images/bad-macro.png" style="max-width: 40vw"><br>
+		<img src="images/bad-macro-output.png" style="max-width: 40vw"><br><br>
+		<div class="medium">your coding assistant agent gives you a bad command... seriously guys...</div>
+        <img src="images/bad-curl.png" style="max-width: 40vw"><br>
+      </section><hr class="break">
+      <br><br><br><br>
+
+      <section id="payloads">
+        <strong class="large">payloads</strong><br><br>
+		<div class="medium">so we can get code to run on computers, now what?</div><br>
+        <img src="images/everything.png" style="max-width: 40vw"><br>
+
+		<div class="medium">common payload types</div><br>
+		
+		<div class="medium"><strong>1. </strong>data theft</div>
+		<div class="medium">steal passwords, browser sessions, or other data</div><br>
+
+		<div class="medium"><strong>2. </strong>ransomware</div>
+		<div class="medium">encrypt or lock files to demand payment</div><br>
+
+		<div class="medium"><strong>3. </strong>remote control / botnets</div>
+		<div class="medium">turn machines into remotely controlled nodes</div><br>
+
+		<div class="medium"><strong>4. </strong>surveillance</div>
+		<div class="medium">persistently and quietly monitor activity</div><br>
+
+		<div class="medium"><strong>5. </strong>resource abuse</div>
+		<div class="medium">crypto mining, spam sending, network resources</div><br>
+
+		<div class="medium"><strong>6. </strong>destruction</div>
+		<div class="medium">delete data or intentionally damage machine</div><br><br>
+      </section><hr class="break">
+      <br><br><br><br>
+
+      <section id="payloads">
+        <strong class="large">implementing our own...</strong><br><br>
+		<div class="medium">safely and in a fun way...</div><br>
       </section><hr class="break">
       <br><br><br><br>
 
       <section id="thank-you">
-        <strong class="large">Thank You!</strong><br><br>
+        <strong class="large">thank you for listening!</strong><br><br>
         <div class="medium">code and presentation materials are written by Ryan Alport</div>
         <div class="medium">please reach out to <a style="text-decoration:underline;color: black;">Ralport2005@gmail.com</a> with any questions</div><br>
-        <div class="medium"><a style="color: blue;" href="">code</a></div>
+        <div class="medium">no public code today :/</div>
         <div class="medium"><a style="color: blue;" href="/">club home</a></div>
       </section><hr class="break">
       <br><br><br><br>
 
       <section id="resources">
         <strong class="large">Resources</strong><br>
-        <a class="medium" style="color: blue;" href="">resource - author</a><br>
-        <a class="medium" style="color: blue;" href="">resource - author</a><br>
-        <a class="medium" style="color: blue;" href="">resource - author</a><br>
+        <a class="medium" style="color: blue;" href="https://www.youtube.com/watch?v=2jIMMS1LW00">how to write successful malware - Threatlocker CEO</a><br>
+        <a class="medium" style="color: blue;" href="https://isc.sans.edu/diary/24564">deobfuscating malicious word macro - SANS Technology Institute</a><br>
         <a class="medium" style="color: blue;" href="">resource - author</a><br>
         <br><br><br><br>
       </section>
