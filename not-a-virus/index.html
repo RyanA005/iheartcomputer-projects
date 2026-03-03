@@ -58,10 +58,10 @@
 
       <section id="spreading-malware">
         <strong class="large">how does malware spread?</strong><br><br>
-    <div class="medium">most malware is intentionally installed and run by users</div><br>
-    <div class="medium">phishing links</div>
-    <div class="medium">fake downloads</div>
-    <div class="medium">email attachments</div>
+		<div class="medium">most malware is intentionally installed and run by users</div><br>
+		<div class="medium">phishing links</div>
+		<div class="medium">fake downloads</div>
+		<div class="medium">email attachments</div>
 		<div class="medium">free software installs</div><br><br>
 
 		<div class="medium">exploiting systems themselves is much harder but exploits exist</div><br>
@@ -96,12 +96,10 @@
 		<div class="medium">your boss sends you what looks like a pdf but is really a malware executable</div>
         <img src="images/fake-email.png" style="max-width: 40vw"><br>
         <img src="images/fake-pdf.png" style="max-width: 40vw"><br>
-		<img src="images/fake-pdf-output.png" style="max-width: 40vw"><br><br>
 		<div class="medium">a normal looking download installs an executable or bad installer</div>
 		<img src="images/fake-download.png" style="max-width: 40vw"><br><br>
 		<div class="medium">a document you want to view prompts you to run a script</div>
         <img src="images/bad-macro.png" style="max-width: 40vw"><br>
-		<img src="images/bad-macro-output.png" style="max-width: 40vw"><br><br>
 		<div class="medium">your coding assistant agent gives you a bad command... seriously guys...</div>
         <img src="images/bad-curl.png" style="max-width: 40vw"><br>
       </section><hr class="break">
@@ -134,9 +132,20 @@
       </section><hr class="break">
       <br><br><br><br>
 
-      <section id="payloads">
+      <section id="implementation">
         <strong class="large">implementing our own...</strong><br><br>
-		<div class="medium">safely and in a fun way...</div><br>
+		<div class="medium"><strong>goals:</strong></div><br>
+		<div class="medium">pretend to be a normal program</div>
+        <div class="medium">encrypt files for ransom</div>
+        <div class="medium">scan network for other hosts</div>
+		<div class="medium">open a channel for remote control</div>
+		<div class="medium">become persistent</div><br>
+		<div class="medium">we will do this all in a super obvious way and not actually break anything</div>
+      </section><hr class="break">
+      <br><br><br><br>
+
+      <section id="demo">
+        <strong class="large">...</strong><br><br>
       </section><hr class="break">
       <br><br><br><br>
 
