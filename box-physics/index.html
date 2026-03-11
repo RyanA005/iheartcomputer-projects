@@ -6,7 +6,7 @@
     <meta name="description" content="IHEARTCOMPUTER">
     <title>IHEARTCOMPUTER</title>
     <link rel="icon" type="image/x-icon" href="/logo.png">
-    <link rel="stylesheet" href="public/styles.css">
+    <link rel="stylesheet" href="/styles.css">
 </head>
 <style>
     .graphic {
@@ -45,7 +45,7 @@
             <div class="medium">by <a href="https://github.com/aderoian" style="color: blue;">Armen Deroian</a></div>
             <br>
 
-            <div><img src="public/images/initial_demo.gif" alt="Cube breaking through wall of cubes." style="width: 80%; height: 80%"></div>
+            <div><img src="images/initial_demo.gif" alt="Cube breaking through wall of cubes." style="width: 80%; height: 80%"></div>
         </section>
 
         <br><br>
@@ -70,9 +70,9 @@
             <div class="medium">they are used in a wide range of applications, including video games, virtual reality, robotics, and scientific simulations.</div><br>
             <br>
             <div style="display: flex; flex-direction: row; justify-content: space-between; flex-wrap: wrap" >
-                <img src="public/images/sea-of-theives.png" alt="Sea of Thieves" style="width: 300px; height: 300px;">
-                <img src="public/images/scientific_engine.gif" alt="Scientific Engine" style="width: 300px; height: 300px;">
-                <img src="public/images/blender_physics.gif" alt="Blender Physics" style="width: 300px; height: 300px;">
+                <img src="images/sea-of-theives.png" alt="Sea of Thieves" style="width: 300px; height: 300px;">
+                <img src="images/scientific_engine.gif" alt="Scientific Engine" style="width: 300px; height: 300px;">
+                <img src="images/blender_physics.gif" alt="Blender Physics" style="width: 300px; height: 300px;">
             </div>
             <br>
             <div class="medium">physics engines allow developers to create realistic and interactive environments without having to manually code the complex physics interactions.</div><br>
@@ -115,7 +115,7 @@
             <div class="medium">1. <strong>Initialization</strong>: set up the simulation environment, load objects, and initialize their properties.</div><br>
             <div class="medium">2. <strong>Simulation Loop</strong>: repeatedly update the simulation by calculating forces, updating object states, and handling collisions.</div><br>
             <div class="medium">3. <strong>Rendering</strong>: visualize the simulation results, often in real-time for games or interactive applications.</div><br>
-            <div><img src="public/images/architecture.png" alt="Architecture" style="width: 100%; height: 100%"></div><br>
+            <div><img src="images/architecture.png" alt="Architecture" style="width: 100%; height: 100%"></div><br>
         </section>
 
         <br><br>
@@ -197,13 +197,13 @@
             <div class="medium">we are asking: could the objects possibly be colliding?</div>
             <div class="medium">common broad phase algorithms include:</div><br>
             <div class="medium">1. <strong>Spatial Partitioning</strong>: dividing the simulation space into a grid or tree structure (e.g., quadtree, octree) to efficiently query for nearby objects.</div><br>
-            <div><img class="graphic" src="public/images/octree.png" alt="Spatial Partitioning" ></div>
+            <div><img class="graphic" src="images/octree.png" alt="Spatial Partitioning" ></div>
             <br>
             <div class="medium">2. <strong>Sweep and Prune</strong>: sorting objects along an axis and checking for overlapping intervals to identify potential collisions.</div><br>
-            <div><img class="graphic" src="public/images/sweep_and_prune.jpg" alt="Sweep and Prune" ></div>
+            <div><img class="graphic" src="images/sweep_and_prune.jpg" alt="Sweep and Prune" ></div>
             <br>
             <div class="medium">3. <strong>Bounding Volume Hierarchies (BVH)</strong>: organizing objects into a hierarchy of bounding volumes to quickly eliminate non-colliding pairs.</div><br>
-            <div><img class="graphic" src="public/images/bvh.jpg" alt="BVH" ></div>
+            <div><img class="graphic" src="images/bvh.jpg" alt="BVH" ></div>
             <br>
             <div class="medium">typically, objects are placed in a "bounding volume" which is most commonly an AABB. This bounding volume is used during broad-phase for quicker calculations. </div><br>
         </section>
@@ -235,7 +235,7 @@
             <div class="medium">2. <strong>contact normal</strong> - a vector that points from one object to the other</div><br>
             <div class="medium">3. <strong>penetration depth</strong> - how much the objects are overlapping</div><br>
             <div class="medium">it is used to calculate the response to a collision, such as applying forces to separate the objects and simulate realistic interactions.</div><br>
-            <div><img class="graphic" src="public/images/box_clipping.png" alt="Contact Manifold"></div>
+            <div><img class="graphic" src="images/box_clipping.png" alt="Contact Manifold"></div>
         </section>
 
         <br><br>
@@ -261,15 +261,15 @@
             <div class="medium">the impulse can be calculated using the following formula:</div><br>
             <div class="medium">J = -(1 + e) * (v_rel · n) / (1/m1 + 1/m2)</div><br>
             <div class="medium">where J is the impulse, e is the coefficient of restitution (which determines how bouncy the collision is), v_rel is the relative velocity of the objects at the contact point, n is the contact normal, and m1 and m2 are the masses of the objects.</div><br><br>
-            <video class="graphic" src="public/videos/boxes.mp4" controls></video><br><br>
-            <video class="graphic" src="public/videos/bouncy_boxes.mp4" controls></video><br><br>
+            <video class="graphic" src="videos/boxes.mp4" controls></video><br><br>
+            <video class="graphic" src="videos/bouncy_boxes.mp4" controls></video><br><br>
             <div class="medium">a frictional impulse can also be calculated to simulate the effects of friction between the objects:</div><br>
             <div class="medium">J_friction = -μ * J * t</div><br>
             <div class="medium">where J_friction is the frictional impulse, μ is the coefficient of friction, J is the normal impulse calculated earlier, and t is the tangent vector at the contact point.</div><br><br>
             <div class ="medium">once the impulse is calculated, we can apply it to the velocities of the objects to simulate the collision response.</div><br>
             <div style="display: flex; flex-direction: row; justify-content: center; flex-wrap: wrap">
-                <img class="graphic" src="public/images/box_clipping.png" alt="Impulse">
-                <img class="graphic" src="public/images/box_resolution.png" alt="Frictional Impulse">
+                <img class="graphic" src="images/box_clipping.png" alt="Impulse">
+                <img class="graphic" src="images/box_resolution.png" alt="Frictional Impulse">
             </div>
         </section>
 
@@ -295,7 +295,7 @@
             <div class="medium">for example, the Euler method is simple and fast but can be unstable for larger time steps, while more advanced methods like Runge-Kutta or Verlet integration can provide better accuracy and stability at the cost of increased computational complexity.</div><br>
 
             <div class="medium"><strong>Jitter & the stacking problem</strong>: when simulating a stack of objects, small errors in the simulation can accumulate over time, causing the stack to become unstable and collapse. This is often due to the way collisions are resolved and can be mitigated by using more accurate collision response methods or by implementing additional constraints to keep the objects in place.</div><br>
-            <img class="graphic" src="public/images/stacking_problem.gif" alt="Stacking Problem"><br>
+            <img class="graphic" src="images/stacking_problem.gif" alt="Stacking Problem"><br>
         </section>
 
         <br><br>
@@ -342,8 +342,8 @@
 
         <section id="failures">
             <div class="medium">things always go wrong...</div><br>
-            <video class="graphic" src="public/videos/failure_vanish.mp4" controls></video><br><br>
-            <video class="graphic" src="public/videos/failure_energy.mp4" controls></video><br><br>
+            <video class="graphic" src="videos/failure_vanish.mp4" controls></video><br><br>
+            <video class="graphic" src="videos/failure_energy.mp4" controls></video><br><br>
         </section>
 
         <br><br>
