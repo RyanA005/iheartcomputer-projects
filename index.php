@@ -31,7 +31,7 @@
 	<div class="large">Projects</div><br>
     
 	<?php 
-    $archive = ["vim-demo"];
+    $archive = ["vim-demo", "iheartcomputer-template"]; // still avaliable but not listed
 	$files = scandir('.');
 	foreach ($files as $file) {
         if ($file != '.' && $file != '..' && is_dir($file) && !str_starts_with($file, '.') && !in_array($file, $archive)) { 
