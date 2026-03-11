@@ -1,0 +1,56 @@
+# CLion/Google style adapted for modern C (C11/C17/C23)
+BasedOnStyle: Google
+
+# --- General formatting ---
+IndentWidth: 4
+TabWidth: 4
+UseTab: Always
+ColumnLimit: 180
+
+# --- Language ---
+Language: Cpp
+Standard: c++17
+
+# --- Braces & indentation ---
+BreakBeforeBraces: Attach             # Attach braces to statements & functions
+AllowShortFunctionsOnASingleLine: Inline
+IndentCaseLabels: true
+
+# --- Includes ---
+IncludeBlocks: Regroup
+IncludeCategories:
+  - Regex: '^<.*\.h>'
+    Priority: 1
+  - Regex: '^<.*>'
+    Priority: 2
+  - Regex: '^".*"'
+    Priority: 3
+
+# --- Pointers ---
+PointerAlignment: Left                # int* ptr;
+# ReferenceAlignment is C++-only; omitted
+
+# --- Functions ---
+AllowAllParametersOfDeclarationOnNextLine: false
+BinPackParameters: true
+BinPackArguments: true
+
+# --- Structs & enums ---
+AccessModifierOffset: 0               # Not applicable in C
+AlignAfterOpenBracket: Align
+DerivePointerAlignment: false
+
+# --- Comments ---
+ReflowComments: Always
+SpacesBeforeTrailingComments: 1
+
+# --- Others ---
+SpaceBeforeParens: ControlStatements  # if (foo) not if(foo)
+Cpp11BracedListStyle: true            # works for C99/C11 initializer lists
+
+# --- Modern C keywords support ---
+# These ensure _Atomic, _Thread_local, _Static_assert, _Noreturn etc. are parsed correctly
+ExtraKeywordSpecifiers: [_Atomic, _Thread_local, _Static_assert, _Noreturn]
+
+# --- Optional cleanup ---
+AllowShortBlocksOnASingleLine: Always

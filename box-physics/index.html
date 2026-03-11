@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="IHEARTCOMPUTER">
+    <title>IHEARTCOMPUTER</title>
+    <link rel="icon" type="image/x-icon" href="/logo.png">
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<div class="main">
+    <header class="header">
+        <div class="title">
+            <strong class="large" style="align-self: flex-start;">I<span style="color: #e00;">♥</span>COMPUTER</strong>
+        </div>
+        <nav class="nav">
+            <a class="link" href="/">home</a>
+            <a class="link" href="https://discord.gg/JpRw84Ybwg" target="_blank">discord</a>
+            <a class="link" href="/projects/">projects</a>
+        </nav>
+    </header>
+
+    <hr class="break">
+    <br><br>
+
+    <div class="content">
+
+        <section id="title">
+            <strong class="large">Fundamentals of Physics Simulation</strong><br><br>
+            <div class="medium">Building a basic physics engine from scratch in C</div><br>
+            <div class="medium">by <a href="https://github.com/aderoian" style="color: blue;">Armen Deroian</a></div>
+            <br>
+
+            <div><img src="/images/initial_demo.gif" alt="Cube breaking through wall of cubes."></div>
+        </section>
+
+        <br><br>
+        <hr class="break">
+        <br><br>
+
+        <section id="goals">
+            <strong class="large">what we will discuss:</strong><br><br>
+            <div class="medium">1. what is a physics engine and why is it important today</div><br>
+            <div class="medium">2. understand the core components of a physics engine</div><br>
+            <div class="medium">3. explore some challenges when simulating physics</div><br>
+            <div class="medium">4. discuss the next steps and implementation of production-grade engines</div><br>
+        </section>
+
+        <br><br>
+        <hr class="break">
+        <br><br>
+
+        <section id="what">
+            <strong class="large">what is a physics engine?</strong><br><br>
+            <div class="medium">a physics engine is a software component that simulates physical systems, such as rigid body dynamics, fluid dynamics, and collision detection.</div><br>
+            <div class="medium">they are used in a wide range of applications, including video games, virtual reality, robotics, and scientific simulations.</div><br>
+            <br>
+            <div style="display: flex; flex-direction: row; justify-content: space-between">
+                <img src="/images/sea-of-theives.png" alt="Sea of Thieves" style="width: 300px; height: 300px;">
+                <img src="/images/scientific_engine.gif" alt="Scientific Engine" style="width: 300px; height: 300px;">
+                <img src="/images/blender_physics.gif" alt="Blender Physics" style="width: 300px; height: 300px;">
+            </div>
+            <br>
+            <div class="medium">physics engines allow developers to create realistic and interactive environments without having to manually code the complex physics interactions.</div><br>
+        </section>
+
+        <br><br>
+        <hr class="break">
+        <br><br>
+
+        <section id="importance">
+            <strong class="large">why are physics engines important today?</strong><br><br>
+            <div class="medium">physics engines are crucial for creating immersive and realistic experiences in video games and virtual reality.</div><br>
+            <div class="medium">they enable developers to simulate complex interactions between objects, such as collisions, gravity, and fluid dynamics, which enhance the overall user experience.</div><br>
+            <div class="medium">in scientific simulations, physics engines allow researchers to model and study physical phenomena that would be difficult or impossible to replicate in real life.</div><br>
+            <div class="medium">in robotics, physics engines are used to simulate the behavior of robots in various environments, helping engineers design and test their creations before building physical prototypes.</div><br>
+        </section>
+
+        <br><br>
+        <hr class="break">
+        <br><br>
+
+        <section id="components">
+            <strong class="large">core components of a physics engine</strong><br><br>
+            <div class="medium">1. <strong>Rigid Body Dynamics</strong>: simulates the motion and interaction of solid objects.</div><br>
+            <div class="medium">2. <strong>Collision Detection</strong>: determines when and where objects collide.</div><br>
+            <div class="medium">3. <strong>Constraint Solvers</strong>: handle constraints between objects, such as joints or ropes.</div><br>
+            <div class="medium">4. <strong>Fluid Dynamics</strong>: simulates the behavior of fluids, such as water or smoke.</div><br>
+            <div class="medium">5. <strong>Soft Body Dynamics</strong>: simulates deformable objects, such as cloth or jelly.</div><br>
+
+            <br>
+            <div class="medium">today we will discuss rigid body dynamics, collision detection, and a simple constraint solver</div><br>
+        </section>
+
+        <br><br>
+        <hr class="break">
+        <br><br>
+
+        <section id="very-basic-architecture">
+            <div><strong class="large">very basic architecture of a physics engine</strong></div><br><br>
+            <div class="medium">1. <strong>Initialization</strong>: set up the simulation environment, load objects, and initialize their properties.</div><br>
+            <div class="medium">2. <strong>Simulation Loop</strong>: repeatedly update the simulation by calculating forces, updating object states, and handling collisions.</div><br>
+            <div class="medium">3. <strong>Rendering</strong>: visualize the simulation results, often in real-time for games or interactive applications.</div><br>
+            <div><img src="/images/architecture.png" alt="Architecture" style=""></div><br>
+        </section>
+
+        <br><br>
+        <hr class="break">
+        <br><br>
+
+        <section id="rigid-body-dynamics">
+            <strong class="large">rigid body dynamics</strong><br><br>
+            <div class="medium">rigid body dynamics simulates the motion and interaction of solid objects that do not deform.</div><br>
+            <div class="medium">it is based on Newton's laws of motion, which describe how objects move in response to forces.</div><br>
+            <div class="medium">the core equation for rigid body dynamics are:</div><br>
+            <div class="medium">F = m * a (force equals mass times acceleration)</div><br>
+            <div class="medium">τ = I * α (torque equals moment of inertia times angular acceleration)</div><br>
+            <div class="medium">to simulate rigid body dynamics, we need to calculate the forces and acting on each object, and then update their positions and orientations based on the equations of motion.</div><br>
+        </section>
+
+        <br><br>
+        <hr class="break">
+        <br><br>
+
+        <section id="rigid-body-representation">
+            <strong class="large">rigid body representation</strong><br><br>
+            <div class="medium">to represent a rigid body in a simple physics engine, we will use the following data structure that includes the following properties:</div><br>
+            <div class="medium">1. <strong>mass</strong> - the mass of the object, which determines how it responds to forces.</div><br>
+            <div class="medium">2. <strong>inverse mass</strong> - commonly cache 1/mass to prevent division ops</div><br>
+            <div class="medium">3. <strong>position</strong> - the location of the object in 3D space.</div><br>
+            <div class="medium">4. <strong>velocity</strong> - the rate of change of the object's position.</div><br>
+            <div class="medium">5. <strong>forces</strong> - the external influences acting on the object, which can change its motion.</div><br>
+            <div class="medium">6. <strong>bounding shape</strong> - the collision information used in broad phase.</div><br>
+            <div class="medium">7. <strong>collision shape</strong> - the collision information used in narrow phase.</div><br><br>
+
+            <div class="medium">production engines use more fields to represent complicated motion:</div><br>
+            <div class="medium">1. <strong>orientation</strong> - the rotation of the object in 3D space, often represented as a quaternion or Euler angles.</div><br>
+            <div class="medium">2. <strong>angular velocity</strong> - the rate of change of the object's orientation.</div><br>
+            <div class="medium">3. <strong>torques</strong> - the rotational forces acting on the object, which can change its orientation.</div><br>
+            <div class="medium">4. <strong>inertia tensor</strong> - a measure of an object's resistance to changes in its rotation, which depends on its mass distribution.</div><br>
+        </section>
+
+        <br><br>
+        <hr class="break">
+        <br><br>
+
+        <section id="integration">
+            <strong class="large">numerical integration</strong><br><br>
+            <div class="medium">to update the positions and orientations of objects based on the forces, we need to use numerical integration methods.</div><br>
+
+            <div class="medium">a(t) = F(t) / m</div><br>
+
+            <div class="medium">the simplest method is the Euler method:</div><br>
+            <div class="medium">v(t + Δt) = v(t) + a(t) * Δt</div><br>
+            <div class="medium">x(t + Δt) = x(t) + v(t) * Δt</div><br>
+
+            <div class="medium">however, the Euler method can be unstable and inaccurate for large time steps, so most custom engines use Semi Implicit Euler:</div><br>
+            <div class="medium">v(t + Δt) = v(t) + a(t) * Δt</div><br>
+            <div class="medium">x(t + Δt) = x(t) + v(t + Δt) * Δt</div><br>
+            <div class="medium">this method is more stable and allows for larger time steps, but it can still introduce errors over time, so more advanced methods like Runge-Kutta or Verlet integration are often used in production engines.</div><br>
+        </section>
+
+        <br><br>
+        <hr class="break">
+        <br><br>
+
+        <section id="collision-detection">
+            <strong class="large">collision detection</strong><br><br>
+            <div class="medium">collision detection is the process of determining when and where objects in the simulation collide.</div><br>
+            <div class="medium">it is a crucial component of a physics engine, as it allows for realistic interactions between objects, such as bouncing, sliding, and stacking.</div><br>
+            <div class="medium">collision detection typically involves two main steps:</div><br>
+            <div class="medium">1. <strong>Broad Phase</strong>: quickly identify pairs of objects that may be colliding using simple bounding volumes (e.g., AABBs or spheres).</div><br>
+            <div class="medium">2. <strong>Narrow Phase</strong>: perform detailed collision checks on the identified pairs using more complex shapes (e.g., polygons or meshes) to determine if they are actually colliding and to calculate a contact manifold.</div><br>
+        </section>
+
+        <br><br>
+        <hr class="break">
+        <br><br>
+
+        <section id="broad-phase">
+            <strong class="large">broad phase collision detection</strong><br><br>
+            <div class="medium">the broad phase is the first step in collision detection, where we quickly identify pairs of objects that may be colliding using simple bounding volumes.</div><br>
+            <div class="medium">we are asking: could the objects possibly be colliding?</div>
+            <div class="medium">common broad phase algorithms include:</div><br>
+            <div class="medium">1. <strong>Spatial Partitioning</strong>: dividing the simulation space into a grid or tree structure (e.g., quadtree, octree) to efficiently query for nearby objects.</div><br>
+            <div><img src="/images/octree.png" alt="Spatial Partitioning" style="width: 40%; height: 40%;"></div>
+            <br>
+            <div class="medium">2. <strong>Sweep and Prune</strong>: sorting objects along an axis and checking for overlapping intervals to identify potential collisions.</div><br>
+            <div><img src="/images/sweep_and_prune.jpg" alt="Sweep and Prune" style="width: 40%; height: 40%;"></div>
+            <br>
+            <div class="medium">3. <strong>Bounding Volume Hierarchies (BVH)</strong>: organizing objects into a hierarchy of bounding volumes to quickly eliminate non-colliding pairs.</div><br>
+            <div><img src="/images/bvh.jpg" alt="BVH" style="width: 40%; height: 40%;"></div>
+            <br>
+            <div class="medium">typically, objects are placed in a "bounding volume" which is most commonly an AABB. This bounding volume is used during broad-phase for quicker calculations. </div><br>
+        </section>
+
+        <br><br>
+        <hr class="break">
+        <br><br>
+
+        <section id="narrow-phase">
+            <strong class="large">narrow phase collision detection</strong><br><br>
+            <div class="medium">the narrow phase is the second step in collision detection, where we perform detailed collision checks on the identified pairs of objects from the broad phase.</div><br>
+            <div class="medium">this involves checking the actual shapes of the objects (e.g., polygons, meshes) to determine if they are colliding and to calculate a contact manifold.</div><br>
+            <div class="medium">common narrow phase algorithms include:</div><br>
+            <div class="medium">1. <strong>Separating Axis Theorem (SAT)</strong> - checks if there is a separating axis between two convex shapes</div><br>
+            <div class="medium">2. <strong>Gilbert-Johnson-Keerthi (GJK) Algorithm & Expanding Polytope Algorithm (EPA)</strong> - algorithm pair for convex shapes</div>
+            <div class="medium">3. <strong>Bounding Volume Hierarchies (BVH) Narrow Phase</strong> - uses the BVH from the broad phase to perform more detailed checks on the actual geometry of the objects.</div><br>
+            <div class="medium">4. <strong>Triangle Mesh Collision Detection</strong> - checks for collisions between complex meshes, often using spatial partitioning to optimize the process.</div><br><br>
+            <div class="medium">the narrow phase is more computationally expensive than the broad phase, but it is necessary for accurate collision detection and response.</div><br>
+        </section>
+
+        <br><br>
+        <hr class="break">
+        <br><br>
+
+        <section id="contact-manifold">
+            <strong class="large">contact manifold</strong><br><br>
+            <div class="medium">a contact manifold is a data structure that describes the points of contact between two colliding objects, including:</div><br>
+            <div class="medium">1. <strong>contact points</strong> - where the objects are touching</div><br>
+            <div class="medium">2. <strong>contact normal</strong> - a vector that points from one object to the other</div><br>
+            <div class="medium">3. <strong>penetration depth</strong> - how much the objects are overlapping</div><br>
+            <div class="medium">it is used to calculate the response to a collision, such as applying forces to separate the objects and simulate realistic interactions.</div><br>
+            <div><img src="/images/box_clipping.png" alt="Contact Manifold" style="width: 40%; height: 40%;"></div>
+        </section>
+
+        <br><br>
+        <hr class="break">
+        <br><br>
+
+        <section id="constraint-solvers">
+            <strong class="large">constraint solvers</strong><br><br>
+            <div class="medium">constraint solvers are used to handle constraints between objects, such as joints, ropes, or hinges.</div><br>
+            <div class="medium">they work by calculating the forces needed to maintain the constraints and applying them to the objects involved.</div><br>
+            <div class="medium">a simple example of a constraint solver is a spring constraint, which applies a force proportional to the distance between two objects to keep them at a certain distance from each other.</div><br><br>
+            <div class="medium"><strong>Iterative solver</strong>: a common approach to solving constraints is to use an iterative solver, which repeatedly applies corrections to the positions and velocities of the objects for a fixed number of iterations.</div><br>
+        </section>
+
+        <br><br>
+        <hr class="break">
+        <br><br>
+
+        <section id="resolving-collisions">
+            <strong class="large">resolving collisions</strong><br><br>
+            <div class="medium">after detecting a collision and calculating the contact manifold, we need to resolve the collision by applying forces to the objects to separate them and simulate realistic interactions.</div><br>
+            <div class="medium">this typically involves calculating the impulse needed to change the velocities of the objects based on their masses, velocities, and the contact normal.</div><br>
+            <div class="medium">the impulse can be calculated using the following formula:</div><br>
+            <div class="medium">J = -(1 + e) * (v_rel · n) / (1/m1 + 1/m2)</div><br>
+            <div class="medium">where J is the impulse, e is the coefficient of restitution (which determines how bouncy the collision is), v_rel is the relative velocity of the objects at the contact point, n is the contact normal, and m1 and m2 are the masses of the objects.</div><br><br>
+            <video src="/videos/boxes.mp4" controls style="width: 40%; height: 40%;"></video><br><br>
+            <video src="/videos/bouncy_boxes.mp4" controls style="width: 40%; height: 40%;"></video><br><br>
+            <div class="medium">a frictional impulse can also be calculated to simulate the effects of friction between the objects:</div><br>
+            <div class="medium">J_friction = -μ * J * t</div><br>
+            <div class="medium">where J_friction is the frictional impulse, μ is the coefficient of friction, J is the normal impulse calculated earlier, and t is the tangent vector at the contact point.</div><br><br>
+            <!-- TODO: add gifs of different frictional interactions -->
+
+            <div class ="medium">once the impulse is calculated, we can apply it to the velocities of the objects to simulate the collision response.</div><br>
+            <div style="display: flex; flex-direction: row; justify-content: center">
+                <img src="/images/box_clipping.png" alt="Impulse" style="width: 560px; height: 400px;">
+                <img src="/images/box_resolution.png" alt="Frictional Impulse" style="width: 400px; height: 400px;">
+            </div>
+        </section>
+
+        <br><br>
+        <hr class="break">
+        <br><br>
+
+        <section id="challenges">
+            <strong class="large">challenges in physics simulation</strong><br><br>
+            <div class="medium">1. <strong>stability</strong>: ensuring that the simulation remains stable and does not produce unrealistic results, especially when using larger time steps.</div><br>
+            <div class="medium">2. <strong>accuracy</strong>: balancing the need for accurate simulations with the computational cost, as more accurate methods can be more expensive to compute.</div><br>
+            <div class="medium">3. <strong>collision handling</strong>: dealing with complex collision scenarios, such as stacking objects or simulating soft body interactions.</div><br>
+            <div class="medium">4. <strong>performance</strong>: optimizing the simulation to run efficiently in real-time applications, such as video games or virtual reality.</div><br>
+        </section>
+
+        <br><br>
+        <hr class="break">
+        <br><br>
+
+        <section id="challenges-stability-accuracy">
+            <strong class="large">stability vs accuracy</strong><br><br>
+            <div class="medium">there is often a trade-off between stability and accuracy in physics simulation. More accurate methods can be computationally expensive and may require smaller time steps to remain stable, while less accurate methods can be faster but may produce unrealistic results.</div><br>
+            <div class="medium">for example, the Euler method is simple and fast but can be unstable for larger time steps, while more advanced methods like Runge-Kutta or Verlet integration can provide better accuracy and stability at the cost of increased computational complexity.</div><br>
+
+            <div class="medium"><strong>Jitter & the stacking problem</strong>: when simulating a stack of objects, small errors in the simulation can accumulate over time, causing the stack to become unstable and collapse. This is often due to the way collisions are resolved and can be mitigated by using more accurate collision response methods or by implementing additional constraints to keep the objects in place.</div><br>
+            <img src="/images/stacking_problem.gif" alt="Stacking Problem" style="width: 40%; height: 40%;"><br>
+        </section>
+
+        <br><br>
+        <hr class="break">
+        <br><br>
+
+        <section id="challenges-performance">
+            <strong class="large">performance optimization</strong><br><br>
+            <div class="medium">optimizing the performance of a physics engine is crucial for real-time applications, such as video games or virtual reality. Some common techniques for improving performance include:</div><br>
+            <div class="medium">1. <strong>Spatial Partitioning</strong>: using spatial data structures (e.g., grids, quadtrees, octrees) to efficiently query for nearby objects and reduce the number of collision checks.</div><br>
+            <div class="medium">2. <strong>Level of Detail (LOD)</strong>: using simpler physics simulations for distant or less important objects to reduce computational load.</div><br>
+            <div class="medium">3. <strong>Multithreading</strong>: leveraging multiple CPU cores to parallelize the simulation and improve performance.</div><br>
+            <div class="medium">4. <strong>GPU Acceleration</strong>: using the GPU to perform physics calculations in parallel, which can significantly improve performance for complex simulations.</div><br>
+        </section>
+
+        <br><br>
+        <hr class="break">
+        <br><br>
+
+        <section id="production-steps">
+            <strong class="large">production-grade engines</strong><br><br>
+            <div class="medium">to implement a production-grade physics engine, we would need to consider additional features and optimizations, such as:</div><br>
+            <div class="medium">1. <strong>Support for more complex shapes</strong>: implementing support for a wider variety of shapes, such as concave meshes or soft bodies.</div><br>
+            <div class="medium">2. <strong>Advanced collision response</strong>: implementing more sophisticated collision response methods to handle complex interactions between objects.</div><br>
+            <div class="medium">3. <strong>Advanced constraints</strong>: implementing more complex constraints, such as ragdoll physics or vehicle simulations.</div><br>
+            <div class="medium">4. <strong>Multithreading and GPU acceleration</strong>: optimizing the engine to take advantage of modern hardware capabilities for improved performance.</div><br>
+            <div class="medium">5. <strong>Integration with rendering engines</strong>: ensuring that the physics engine can be easily integrated with popular rendering engines (e.g., Unity, Unreal Engine) for use in games and other applications.</div><br>
+            <div class="medium">6. <strong>Robustness and stability</strong>: implementing additional features to improve the stability and robustness of the engine, such as better handling of edge cases and more accurate numerical methods.</div><br>
+        </section>
+
+        <br><br>
+        <hr class="break">
+        <br><br>
+
+        <section id="conclusion">
+            <strong class="large">conclusion</strong><br><br>
+            <div class="medium">in this presentation, we have discussed the fundamentals of physics simulation, including the core components of a physics engine, the challenges involved in simulating physics, and the steps needed to implement a production-grade engine.</div><br>
+            <div class="medium">physics engines play a crucial role in creating immersive and realistic experiences in video games, virtual reality, scientific simulations, and robotics. By understanding the underlying principles and techniques of physics simulation, developers can create more engaging and interactive applications.</div><br>
+        </section>
+
+        <br><br>
+        <hr class="break">
+        <br><br>
+
+        <section id="failures">
+            <div class="medium">things always go wrong...</div><br>
+            <video src="/videos/failure_vanish.mp4" controls style="width: 40%; height: 40%;"></video><br><br>
+            <video src="/videos/failure_energy.mp4" controls style="width: 40%; height: 40%;"></video><br><br>
+        </section>
+
+        <br><br>
+        <hr class="break">
+        <br><br>
+
+        <section id="thank-you">
+            <div class="medium">thank you for your attention! I hope this presentation has provided you with a solid foundation for understanding physics simulation and has inspired you to explore this fascinating field further.</div><br>
+        </section>
+    </div>
+    <hr class="break">
+
+</div>
+</body>
+</html>
