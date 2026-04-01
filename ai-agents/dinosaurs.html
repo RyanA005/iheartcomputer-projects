@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate Dino Museum</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4e4bc;
+            color: #555;
+        }
+        h1 {
+            color: #8b4513;
+            text-align: center;
+            font-size: 3em;
+        }
+        h2 {
+            color: #3e2723;
+            margin-top: 30px;
+        }
+        .banner {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #8b4513;
+            color: white;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .dino {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+        .dino img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .dino h3 {
+            color: #8b4513;
+        }
+        .btn {
+            background: #8b4513;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .btn:hover {
+            background: #6a2c13;
+        }
+        .info {
+            background: white;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+        }
+        .info h3 {
+            color: #3e2723;
+        }
+    </style>
+</head>
+<body>
+    <div class="banner">
+        <h1>Dino World</h1>
+        <p>Discover the ancient legends of the dinosaurs in our museum.</p>
+    </div>
+    <h2>Our Dino Gallery</h2>
+    <div class="gallery">
+        <div class="dino">
+            <img src="https://placekitten.com/150/150" alt="Carnivore Dino">
+            <h3>Carnivore Dino</h3>
+            <p>Fast and agile predators.</p>
+            <button class="btn">Explore</button>
+        </div>
+        <div class="dino">
+            <img src="https://placekitten.com/151/150" alt="Herbivore Dino">
+            <h3>Herbivore Dino</h3>
+            <p>Friendly and curious creatures.</p>
+            <button class="btn">Explore</button>
+        </div>
+        <div class="dino">
+            <img src="https://placekitten.com/152/150" alt="Ostrich Dino">
+            <h3>Ostrich Dino</h3>
+            <p>Small and quick flyers.</p>
+            <button class="btn">Explore</button>
+        </div>
+        <div class="dino">
+            <img src="https://placekitten.com/153/150" alt="Reptile Dino">
+            <h3>Reptile Dino</h3>
+            <p>Slow and steady explorers.</p>
+            <button class="btn">Explore</button>
+        </div>
+    </div>
+
+    <div class="info">
+        <h3>Our Dino Museum</h3>
+        <p>Learn more about dinosaurs by exploring the gallery and visiting our interactive exhibits.</p>
+        <button class="btn" onclick="location.reload()">Explore More</button>
+    </div>
+</body>
+</html>

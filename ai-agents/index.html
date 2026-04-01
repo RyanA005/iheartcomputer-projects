@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="IHEARTCOMPUTER - AI takeover">
+  <title>IHEARTCOMPUTER - AI agents</title>
+  <link rel="icon" type="image/x-icon" href="/logo.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="main">
+    <header class="header">
+      <div class="title">I<span style="color: var(--heart);">♥</span>COMPUTER</div>
+      <nav class="nav">
+        <a class="link" href="/">home</a>
+        <a class="link" href="https://discord.gg/JpRw84Ybwg" target="_blank" rel="noopener noreferrer">discord</a>
+        <a class="link" href="/projects/">projects</a>
+      </nav>
+    </header>
+
+    <div class="content">
+
+      <section id="title">
+        <strong class="large">
+          AI is consuming my life... <br>
+          agents, tools, local LLMs, openclaw, and more
+        </strong>
+        <div class="image-section">
+          <img src="images/ollama-logo.png">
+          <img src="images/qwen-logo.png">
+          <img src="images/openclaw-logo.png">
+          <img src="images/calendar-logo.png">
+          <img src="images/python-logo.png">
+          <img src="images/go-logo.png">
+        </div>
+        <div class="medium">by <a class="link" href="https://ryanhub.org/ryan-alport">Ryan Alport</a></div>
+      </section>
+
+      <section id="meme-history">
+        <strong class="large">history segment</strong>
+        <div class="bullet-list">
+          <div class="medium">- march 2023 - autogpt, first of agentic programming tools</div>
+          <div class="medium">- 2023-2024 - copilot chat, early cursor, ai-native editors become mainstream</div>
+          <div class="medium">- march 2024 - devin AI launches</div>
+          <div class="medium">- 2024-2025 - models and tools improve, MCP and agents become standard</div>
+          <div class="medium">- febuary 2025 - karpathy coins <i>vibe coding</i></div>
+          <div class="medium">- 2025-2026 - claude code, codex, cursor 2.0</div>
+          <div class="medium">- january 2026 - openclaw and claude cowork</div>
+          <div class="medium">- march 2026 - Anthropic says coding accounts for ~50% of all AI activity</div>
+        </div>
+      </section>
+
+      <section id="story">
+        <strong class="large">my villain origin story</strong>
+        <br><br>
+        <img src="images/clawcon.png" style="max-width: 80%;">
+        <div class="medium"><i></i>“I used to be pretty AI-adverse, but at this point, I'm on the train”</i> - me, <a class="link" href="https://www.nbcnews.com/tech/tech-news/lobster-themed-event-ai-enthusiasts-exuberance-side-cocktail-sauce-rcna261892" target="_blank" rel="noopener">NBC News</a></div>
+      </section>
+       
+      <section id="why-these">
+        <strong class="large">making LLMs useful</strong>
+		<div class="medium">LLMs on their own are cool, but cant do any real work</div>
+		<div class="medium">they need tools to do tasks</div>
+		<br>
+		<div class="medium">how does that actually look?</div>
+		<img src="images/tool-chat.png" style="max-width: 80%;">
+		<div class="medium">we can parse regular chat messages to extract these tool calls</div>
+		<br>
+		<div class="medium">getting this to work can actually be tricky...</div>
+		<div class="medium">models often imagine or misuse tools, or include junk explanations</div>
+		<img src="images/tool-error.png" style="max-width: 80%;">
+		<br>
+		<div class="medium">each prompt, we need to expose every tool, system prompt, and context...</div>
+		<div class="medium">this can be difficult to manage and not very scalable</div>
+		<div class="medium"></div>
+       </section>
+
+       <section id="mcp">
+		<strong class="large">brief note about MCP</strong>
+		<div class="medium">MCP is a standard for how LLMs can connect to tools</div>
+		<div class="medium">it defines default values, schemas, and calling information</div>
+		<div class="medium">it allows us to have an abstract layer between models and tools</div>
+		<div class="medium">it is also now being baked into models themselves!</div>
+		<div class="medium">we can swap models, build tools that work anywhere, and standardize agents</div>
+		<img src="images/mcp.png" style="max-width: 80%;">
+		<div class="medium">all that said, we are not using it today</div>
+      </section>
+       
+       <section id="agents">
+        <strong class="large">what are agents?</strong>
+		<div class="medium">agents are just LLMs attached to tools, goals, and memory</div>
+		<div class="medium">by introducing state to chatbots, we can get them to do more complex things</div>
+		<div class="medium">you can see how they fit cleanly with the MCP idea</div>
+		<br>
+		<div class="medium">you may hear of agents using the ReAct loop (reasoning, acting)</div>
+		<div class="medium">thinking(LLM), acting(tool), observing(pipe output back to llm) </div>
+      </section>
+
+       <section id="building-our-own">
+        <strong class="large">building agents</strong>
+        <div class="medium">agent loops look something like this</div>
+        <div class="bullet-list">
+          <div class="medium"><strong>construct context</strong></div>
+          <div class="medium"><strong>send to LLM</strong></div>
+          <div class="medium"><strong>parse response</strong></div>
+          <div class="medium"><strong>handle tool calls</strong></div>
+		  <div class="medium"><strong>append results to context</strong></div>
+        </div>
+        <div class="medium">we treat the LLM as a simple function and update its inputs iteratively</div>
+      </section>
+
+      <section id="bash-runner">
+		<strong class="large">the bash agent</strong>
+		<div class="medium">my first attempt to make custom coding agents went very poorly...</div>
+		<div class="medium">it is hard to make models (especially small ones) reliably and usefully call tools</div>
+		<br>
+		<div class="medium"><strong>recurring issues:</strong></div>
+		<div class="bullet-list">
+		  <div class="medium"><strong>- hallucinations</strong>) tools, instructions, context, nothing is safe...</div>
+		  <div class="medium"><strong>- context explosion</strong>) context size grows too large and breaks</div>
+		  <div class="medium"><strong>- tool ambiguity</strong>) models cant figure out how to use tools correctly</div>
+		  <div class="medium"><strong>- models are dumb</strong>) small models are less reliable and less intelligent</div>
+		</div>
+		<br>
+		<img src="images/bash-runner.png" style="max-width: 80%;">
+		<div class="medium"><strong>one stupid simple solution</strong></div>
+		<div class="medium">why not just give the model access to one tool which it already knows?</div>
+		<div class="medium"><strong>bash</strong> is a very useful, very powerful, 50 year old scripting language</div>
+		<div class="medium">lets just have the model output bash and run the command it gives us</div>
+		<br>
+		<div class="medium"><a class="link" href="dinosaurs.html">bashy's dinosaur gallery</a></div>
+		<br>
+		<div class="medium">this is surprisingly effective but it is quite limited and prone to spiral</div>
+		<div class="medium">bashy has a hard time staying on task, remembering what he just did, and debugging</div>
+		<div class="medium">even with the super simple tool calling instructions, bashy messes it up constantly</div>
+		<div class="medium">"just run the bash" is also probably unsafe and certainly too sandboxy for a real tool</div>
+
+      </section>
+
+	  <section id="tool-caller">
+        <strong class="large">actual tool calling</strong>
+		<div class="medium">bashy was a fun experiment but inherently limited</div>
+		<div class="medium">the next step was an agent with more focused tools... guess what i named it</div>
+		<img src="images/tool-caller.png" style="max-width: 80%;">
+		<div class="medium">tooly implemented multiple upgrades from bashy</div>
+		<div class="bullet-list">
+		  <div class="medium"><strong>- interaction</strong>) we can now add and update goals while running</div>
+		  <div class="medium"><strong>- planning</strong>) the model will try to break big tasks into smaller ones</div>
+		  <div class="medium"><strong>- router</strong>) we determine intent of each prompt and build context accordingly</div>
+		  <div class="medium"><strong>- real tools</strong>) deterministic tools now clearly propagate output back to LLM</div>
+		</div>
+		<br>
+		<div class="medium"><a class="link" href="dinosaurs2.html">tooly's favorite dinosaurs</a></div>
+		<br>
+		<div class="medium">the performance improvement is not massive but noticeably better</div>
+		<div class="medium">we are still using very small model and very simple tools...</div>
+      </section>
+       
+	  <section id="openclaw">
+        <strong class="large">openclaw segment</strong>
+		<div class="medium">known by many names and very viral on X / reddit / everywhere</div>
+		<div class="medium">openclaw is an autonomous agent with access to your computer</div>
+		<img src="images/openclaw.png" style="max-width: 80%;">
+		<div class="medium">while it seems pretty fancy, our agents are only really one upgrade away!</div>
+		<br>
+		<div class="medium">openclaw very simply reads its prompts, calls a tool, and continues</div>
+		<div class="medium">the key to its seeming autonomy is its built in <strong>heartbeat</strong></div>
+		<br>
+		<div class="medium"><a class="link" href="https://github.com/digitalknk/openclaw-runbook/blob/main/examples/heartbeat-example.md">example heartbeat.md</a></div>
+		<br>
+		<div class="medium">regularly scheduled nudges allow the agent to constantly monitor events</div>
+		<div class="medium">openclaw allows for heartbeat and additional CRON actions as well</div>
+		<br>
+		<div class="medium">you can configure your agent to constantly check inboxes or perform scheduled tasks</div>
+		<div class="medium">nothing special about those tasks, once again the LLM is just calling tools</div>
+      </section>
+
+	  <section id="openclaw-issues">
+        <strong class="large">openclaw issues</strong>
+		<div class="medium">
+			<strong>access</strong> - part of the fun of openclaw is it has tools that can do almost anything on your computer, file IO, internet connection, access to social medias, etc. access to files is ability to mess up files, reading the internet is opening the door to misinformation or prompt injection, social media connection has potential for all kinds of trouble.
+			<br><br><img src="images/prompt-injection.png" style="max-width: 80%;"><br><br>
+			<strong>context</strong> - in order to maintain so many tools, big heartbeat prompts, system context and more, openclaw builds a huge prompt every time it calls the model. this leads to speed and reasoning degradation, and it only gets worse the longer you leave it running. this concept is known as <a class="link" href="https://www.trychroma.com/research/context-rot">context rot</a>
+			<br><br><img src="images/context-rot.png" style="max-width: 80%;"><br><br>
+			<strong>security</strong> - tools (called skills by openclaw) are riddled with vulnerabilities (some intentionally). openclaw can run any command at any time, dangerous on its own, but more when you consider it is connected to internet. there are also a lot of bugs, privilege escalation, remote control, internet exposure, key leaks, etc.
+			<br><br><img src="images/attack.png" style="max-width: 80%;"><br><br>
+		</div>
+      </section>
+
+	  <section id="">
+        <strong class="large">how do we solve all of that?</strong>
+		<div class="medium">could we scale openclaw down to avoid some of its issues?</div>
+		<div class="small">yea probably</div>
+      </section>
+
+	  <section id="assistant">
+        <strong class="large">final upgrade</strong>
+		<div class="medium">to bring our agents up to speed, we need to write better tools, create a more effective memory management scheme, enforce better tool calling, and build a way to schedule jobs so the agent can work autonomously</div>
+		<div class="small">a nice UI would also be cool...</div>
+		<img src="images/assistant.png" style="max-width: 80%;">
+		<div class="medium">this version is written in Go, ~1000 lines</div>
+		<div class="medium">the tool set is limited but allows us to avoid serious security risks</div>
+		<img src="images/tools.png" style="max-width: 80%;">
+		<div class="medium">the system supports arbitrary scheduled automations allowing the agent to perpetually run and be doing work.</div>
+		<div class="medium">it is easy enough to write and register new tools to handle new tasks and the agent should have instant ability to use them</div>
+		<img src="images/overview.png" style="max-width: 80%;">
+		<div class="small">i can also open the interface on any of my devices via tailscale (shoutout tailscale)</div>
+		<div class="medium">building a more foccused tool set for this lighter system allows extraction of what i consider the most useful openclaw features<div>
+      </section>
+       
+	  <section id="whats-next">
+        <strong class="large">what is next?</strong>
+		<div class="medium">go clone the assistant and write some new tools for it!</div>
+		<div class="medium">i also encourage everyone to go look into the bash tool</div>
+				<br>
+		<div class="medium"><strong>note:</strong> the performance of all of these agents is highly dependent on the LLM they use under the hood. i commonly use Qwen3.5:4b because i can run it fast on my cheap hardware. Look for the biggest, newest models that can fit into your GPU, and run with them, or just pay for frontier models</div>
+		<img src="images/model-stats.png" style="max-width: 80%;"><br>
+		<div class="medium">write agents, write tools, solve context problems, and experiment with models</div>
+		<div class="medium">these things are here to stay and understanding them is becoming <strong>very hirable</strong></div>
+		<br>
+		<div class="medium">if youre looking for a killer project that also might make you rich, i think there is lots of need for elegant memory/context management and token reduction tools... just saying...</div>
+      </section>
+
+	  <section id="thanks">
+        <strong class="large">thank you for listening</strong>
+		<div class="medium">reach out to ralport2005@gmail.com with any questions</div>
+		<img src="images/thank-you.png" style="max-width: 80%;"><br>
+      </section>
+
+      <section id="references">
+        <strong class="large">References</strong><br>
+        <div class="bullet-list">
+		  <div class="medium">- <a class="link" href="https://ryanhub.org/repos/ai-agent-test.git/" target="_blank" rel="noopener">Ryan: Experimental Code</a></div>
+		  <div class="medium">- <a class="link" href="https://ryanhub.org/repos/assistant.git/" target="_blank" rel="noopener">Ryan: Assistant@latest</a></div>
+		  <div class="medium">- <a class="link" href="https://www.anthropic.com/news/model-context-protocol" target="_blank" rel="noopener">Anthropic: Model Context Protocol</a></div>
+		  <div class="medium">- <a class="link" href="https://www.trychroma.com/research/context-rot" target="_blank" rel="noopener">Chroma: Context Rot</a></div>
+		  <div class="medium">- <a class="link" href="https://vibecodingmuseum.org/history.html" target="_blank" rel="noopener">Vibe Coding Museum: History</a></div>
+		  <div class="medium">- <a class="link" href="https://www.nbcnews.com/tech/tech-news/lobster-themed-event-ai-enthusiasts-exuberance-side-cocktail-sauce-rcna261892" target="_blank" rel="noopener">NBC News: Clawcon NYC</a></div>
+        </div>
+      </section>
+    </div>
+  </div>
+</body>
+</html>
