@@ -118,11 +118,11 @@
 			thousands of curves start at random points, read the angle under their head, step forward a few pixels, and repeat. adjusting the noise type and intensity changes the behavior of the curves.</p>
 			<div style="display: flex; flex-direction: row; justify-content: center; gap: 9px;">
 				<div>
-					<img src="images/perlin.png" style="width:25vw; height:25vw;">
+					<img src="images/perlin.png" style="width:100%; height:25vw;">
 					<p>sample perlin noise</p>
 				</div>
 				<div>
-					<img src="images/flow.png" style="width:35vw; height:25vw;">
+					<img src="images/flow.png" style="width:100%; height:25vw;">
 					<p>interpret noise values as a flow field</p>
 				</div>
 			</div>
@@ -154,11 +154,11 @@ for each curve:
             <p>we build a 2D heightmap with fractal brownian motion (layered perlin at increasing frequency, decreasing amplitude). then we just color up to each block based on its height</p>
 			<div style="display: flex; flex-direction: row; justify-content: center; gap: 9px;">
 				<div>
-					<img src="images/brownian.png" style="width:25vw; height:25vw;">
+					<img src="images/brownian.png" style="width:100%; height:25vw;">
 					<p>fractal brownian example</p>
 				</div>
 				<div>
-					<img src="images/minecraft-noise.png" style="width:35vw; height:25vw;">
+					<img src="images/minecraft-noise.png" style="width:100%; height:25vw;">
 					<p>stacking noise can give us different terrain looks</p>
 				</div>
 			</div>
@@ -189,11 +189,11 @@ for each (x, z) with column height h:
 			<p>cells are a fun programming challenge and they can be used to simulate super interesting and complex mechnics just by following basic rules</p>
 			<div style="display: flex; flex-direction: row; justify-content: center; gap: 9px;">
 				<div>
-					<img src="images/noita.png" style="width:35vw; height:25vw;">
+					<img src="images/noita.png" style="width:100%; height:25vw;">
 					<p>noita is a super cool game that uses cells to simulate physics</p>
 				</div>
 				<div>
-					<img src="images/cells.png" style="width:25vw; height:25vw;">
+					<img src="images/cells.png" style="width:100%; height:25vw;">
 					<p>cell art by Claudio Conti</p>
 				</div>
 			</div>
@@ -228,7 +228,7 @@ for each (x, z) with column height h:
 			<p>A list of <strong>rewrite rules</strong> runs in order: each rule defines a and a replacement. we find matches, picks one at random, run the next rule, then repeat</p>
 			<div style="display: flex; flex-direction: row; justify-content: center; gap: 9px;">
 				<div>
-					<img src="images/circuit.png" style="width:80%vw; height:35vw;">
+					<img src="images/circuit.png" style="width:100%; height:35vw;">
 					<p>this examples defines colors as symbols in a grammar and uses them to make a circuit board</p>
 				</div>
 			</div>
@@ -264,6 +264,12 @@ render by mapping each tile code to rectangle colors/pixels</pre>
             <p>unlike the room’s ordered rewrite rules, WFC keeps local agreement</p>
             <p>pieces have rules about what they can connect to and what they cant, we seed the outside and then each uncertain tile checks its neighbors to see if it can 'collapse' into a certain piece</p>
             <p>if a piece has no neighbors then it is equally likely to be all pieces but if it has 4 neighbors it is likely that only one peice will fit</p>
+					<div style="display: flex; flex-direction: row; justify-content: center; gap: 9px;">
+						<div>
+							<img src="images/townscaper.png" style="width:100%; height:35vw;">
+							<p>wfc can be scaled into multiple dimensions and hundreds of rules to make super complex things</p>
+						</div>
+					</div>
             <h3>Pseudocode</h3>
             <pre class="pseudo">rim <- collapsed to grass
 while a cell exists with |options| &gt; 1:
