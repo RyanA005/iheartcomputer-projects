@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>art and worlds - IHEARTCOMPUTER</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="top-nav">
+    <div class="brand">
+      <span class="club">I<span class="heart">&#9829;</span>COMPUTER</span>
+      <nav class="user_tools">
+        <a href="https://ryanhub.org/ryan-alport">ryan alport</a>
+      </nav>
+    </div>
+    <nav class="user_tools">
+      <a href="/">home</a>
+      <a href="/projects">projects</a>
+    </nav>
+  </header>
+
+  <div class="page">
+    <div class="card">
+      <h1>procedural art and worlds</h1>
+      <p class="lede">the implementation of procedural generation algorithms for making cool stuff</p>
+      <section class="thumbnail-images" id="thumbnail-images">
+        <img src="images/flow-art.png" alt="flow art" class="thumbnail-image">
+        <img src="images/voxel-terrain.png" alt="voxel terrain" class="thumbnail-image">
+        <img src="images/fire-sim.png" alt="fire simulation" class="thumbnail-image">
+        <img src="images/room-gen.png" alt="room generation" class="thumbnail-image">
+        <img src="images/city-gen.png" alt="city generation" class="thumbnail-image">
+	  </section><br>
+      <p class="lede">with five interactive demos!</p>
+
+      <section class="demo" id="section-intro">
+        <h2>introduction - what is procedural generation?</h2>
+        <p class="desc">Procedural generation is the process of creating data or content automatically using algorithms or mathematical formulas, rather than manually. It allows for the creation of complex and diverse content quickly and efficiently.</p>
+        <p class="desc">Procedural generation is used in a wide range of applications, including:</p>
+        <ul>
+          <li>video games</li>
+          <li>3D modeling</li>
+          <li>animation</li>
+          <li>architecture</li>
+          <li>art</li>
+        </ul>   
+        <p class="desc">today i want to go the art and worlds route and show you some cool examples of what we can do with procedural generation.</p>
+      </section>
+
+        <details class="demo-notes">
+          <summary>background</summary>
+          <div class="demo-notes__body">
+            <h3>the challenge</h3>
+			<p>it is desirable for a number of applications to generate worlds and simulations which mirror the real world.</p>
+			<p>however, the seeming randomness of nature is difficult to match. the real world is <strong>not random</strong> so it requires more complex algorithms to emulate it.</p>
+			<div style="display: flex; flex-direction: row; justify-content: center; gap: 9px;">
+				<div>
+					<img src="images/random.png" style="width:25vw; height:25vw;">
+					<p>true random looks like pure noise</p>
+				</div>
+				<div>
+					<img src="images/nature.png" style="width:25vw; height:25vw;">
+					<p>complex patterns exist everywhere in nature</p>
+				</div>
+			</div>
+            <h3>history</h3>
+			<p>weve been doing procedural generation since the 70's in video games</p>
+			<p>things have steadily improved not just in games but across other industries like film, art, and simulations</p>
+			<div style="display: flex; flex-direction: row; justify-content: center; gap: 9px;">
+				<div>
+					<img src="images/maze-craze.png" style="width:25vw; height:25vw;">
+					<p>maze craze - 1978</p>
+				</div>
+				<div>
+					<img src="images/no-mans-sky.png" style="width:25vw; height:25vw;">
+					<p>no mans sky - famed for massive fully procedural open world</p>
+				</div>
+			</div>
+            <h3>algorithms</h3>
+			<p>there are many famous algorithms and projects in this field, here are some favorites:</p>
+			<li>perlin noise - <a href="https://en.wikipedia.org/wiki/Perlin_noise">ken perlin 1982</a></li>
+			<li>conways game of life - <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life">john conway 1970</a></li>
+			<li>markov algorithms - <a href="https://en.wikipedia.org/wiki/Markov_algorithm">named for andrey markov</a></li>
+			<li>model synthesis, AKA wave function collapse - <a href="https://en.wikipedia.org/wiki/Model_synthesis">Paul Merrell 2007</a></li><br>
+			<div style="flex: 1; display: flex; flex-direction: row; justify-content: center; gap: 9px;">
+				<div style="width:20%;">
+					<img src="images/perlin-noise.png" style="width: 100%">
+					<p>perlin noise</p>
+				</div>
+				<div style="width:20%;">
+					<img src="images/conway.png" style="width: 100%">
+					<p>conways game</p>
+				</div>
+				<div style="width:20%;">
+					<img src="images/markov.png" style="width: 100%">
+					<p>markov rules</p>
+				</div>
+				<div style="width:20%;">
+					<img src="images/wave-function.png" style="width: 100%">
+					<p>wave function</p>
+				</div>
+			</div>
+          </div>
+        </details>
+
+      <section class="demo" id="section-flowfield">
+        <h2>flow field art</h2>
+        <p class="desc">a grid of angles steers many curves across the canvas. technique adapted from Tyler Hobbs</p>
+        <canvas id="demo-flowfield" class="demo-canvas"></canvas>
+        <div class="controls" id="controls-flowfield"></div>
+        <details class="demo-notes">
+          <summary>how it works</summary>
+          <div class="demo-notes__body">
+            <h3>Big idea</h3>
+			<p>every cell in the grid calulates a value with the perlin noise function. we are able to interpret those values as an angle in order to generate a smooth flow field. <br>
+			thousands of curves start at random points, read the angle under their head, step forward a few pixels, and repeat. adjusting the noise type and intensity changes the behavior of the curves.</p>
+			<div style="display: flex; flex-direction: row; justify-content: center; gap: 9px;">
+				<div>
+					<img src="images/perlin.png" style="width:25vw; height:25vw;">
+					<p>sample perlin noise</p>
+				</div>
+				<div>
+					<img src="images/flow.png" style="width:35vw; height:25vw;">
+					<p>interpret noise values as a flow field</p>
+				</div>
+			</div>
+            <h3>Pseudocode</h3>
+            <pre class="pseudo">initialize RNG and perlin noise field
+for each grid cell (row, col):
+  n <- noise(col * scale, row * scale)  // approximately [-1, 1]
+  angle <- (n + 1) * PI                 // map to [0, 2*pi]
+for each curve:
+  (x, y) <- random point on canvas
+  repeat curveLength times:
+    a <- grid angle at (x, y)
+    x <- x + cos(a) * step
+    y <- y + sin(a) * step
+    draw segment from previous to current point</pre>
+          </div>
+        </details>
+      </section>
+
+      <section class="demo" id="section-voxels">
+        <h2>mini voxel chunk terrain</h2>
+        <p class="desc">small voxel chunk whose heightmap is driven by layered Perlin noise</p>
+        <canvas id="demo-voxels" class="demo-canvas"></canvas>
+        <div class="controls" id="controls-voxels"></div>
+        <details class="demo-notes">
+          <summary>how it works</summary>
+          <div class="demo-notes__body">
+            <h3>Big idea</h3>
+            <p>we build a 2D heightmap with fractal brownian motion (layered perlin at increasing frequency, decreasing amplitude). then we just color up to each block based on its height</p>
+			<div style="display: flex; flex-direction: row; justify-content: center; gap: 9px;">
+				<div>
+					<img src="images/brownian.png" style="width:25vw; height:25vw;">
+					<p>fractal brownian example</p>
+				</div>
+				<div>
+					<img src="images/minecraft-noise.png" style="width:35vw; height:25vw;">
+					<p>stacking noise can give us different terrain looks</p>
+				</div>
+			</div>
+            <h3>Pseudocode</h3>
+            <pre class="pseudo">for z in 0..N-1:
+  for x in 0..N-1:
+    t <- normalize(fbm(perlin, x * noiseScale, z * noiseScale, octaves))
+    height[x, z] <- round(t * (maxH - 1))
+for each (x, z) with column height h:
+  emit top face at y <- h - 1 with surface color (water, snow, grass, ...)
+  for each neighbor direction:
+    if neighbor height &lt; h:
+      emit side quads between neighbor top and h</pre>
+          </div>
+        </details>
+      </section>
+
+      <section class="demo" id="section-fire">
+        <h2>fire simulation</h2>
+        <p class="desc">cellular automaton that can roughly simulate the behavior of fire with simple rules</p>
+        <canvas id="demo-fire" class="demo-canvas"></canvas>
+        <div class="controls" id="controls-fire"></div>
+        <details class="demo-notes">
+          <summary>how it works</summary>
+          <div class="demo-notes__body">
+            <h3>Big idea</h3>
+            <p>three parallel grids per cell: heat, fuel, smoke. </p>
+			<p>cells are a fun programming challenge and they can be used to simulate super interesting and complex mechnics just by following basic rules</p>
+			<div style="display: flex; flex-direction: row; justify-content: center; gap: 9px;">
+				<div>
+					<img src="images/noita.png" style="width:35vw; height:25vw;">
+					<p>noita is a super cool game that uses cells to simulate physics</p>
+				</div>
+				<div>
+					<img src="images/cells.png" style="width:25vw; height:25vw;">
+					<p>cell art by Claudio Conti</p>
+				</div>
+			</div>
+			<h3>Pseudocode</h3>
+            <pre class="pseudo">each tick:
+  for each cell with fuel:
+    if heat >= ignition:
+      heat <- burnTemp
+      fuel <- fuel - 1
+      if fuel == 0:
+        spawn smoke above and maybe char neighbors
+      else if any neighbor is hot:
+        with probability P, heat <- heat + bump
+  diffuse heat slightly
+  apply wind to smoke
+  decay heat and smoke by their rates
+  write pixels: heat -> fire palette, smoke tint on top</pre>
+          </div>
+        </details>
+      </section>
+
+      <section class="demo" id="section-room">
+        <h2>room generation</h2>
+        <p class="desc">we randomly place furniture across the room based on replacement rules</p>
+        <canvas id="demo-room" class="demo-canvas"></canvas>
+        <div class="controls" id="controls-room"></div>
+        <details class="demo-notes">
+          <summary>how it works</summary>
+          <div class="demo-notes__body">
+            <h3>Big idea</h3>
+			<p>The room is a 2D tile grid which maps to numbers cooresponding to drawable items: stone, wallpaper, wood, furniture.</p>
+			<p>A list of <strong>rewrite rules</strong> runs in order: each rule defines a and a replacement. we find matches, picks one at random, run the next rule, then repeat</p>
+			<div style="display: flex; flex-direction: row; justify-content: center; gap: 9px;">
+				<div>
+					<img src="images/circuit.png" style="width:65vw; height:35vw;">
+					<p>this examples defines colors as symbols in a grammar and uses them to make a circuit board</p>
+				</div>
+			</div>
+            <h3>Pseudocode</h3>
+            <pre class="pseudo">rules <- [fireplace, bookshelves, bed, table, ...]  // wide pieces first
+function step():
+  for each rule in rules:
+    if rule budget is exhausted:
+      continue
+    matches <- []
+    for each variant in rule rotations:
+      matches <- matches + all top-left positions where pattern matches grid
+    if matches is empty:
+      continue
+    pick random match and stamp replacement onto grid
+    rule budget <- rule budget - 1
+    return  // one successful rewrite per step (engine design)
+repeat step() until no rule matches or cap reached
+render by mapping each tile code to rectangle colors/pixels</pre>
+          </div>
+        </details>
+      </section>
+
+      <section class="demo" id="section-wfc">
+        <h2>wave function collapse - city</h2>
+        <p class="desc">a city created by connecting compatible sockets until a grid is filled</p>
+        <canvas id="demo-wfc" class="demo-canvas"></canvas>
+        <div class="controls" id="controls-wfc"></div>
+        <details class="demo-notes">
+          <summary>how it works</summary>
+          <div class="demo-notes__body">
+            <h3>Big idea</h3>
+            <p>unlike the room’s ordered rewrite rules, WFC keeps local agreement</p>
+            <p>pieces have rules about what they can connect to and what they cant, we seed the outside and then each uncertain tile checks its neighbors to see if it can 'collapse' into a certain piece</p>
+            <p>if a piece has no neighbors then it is equally likely to be all pieces but if it has 4 neighbors it is likely that only one peice will fit</p>
+            <h3>Pseudocode</h3>
+            <pre class="pseudo">rim <- collapsed to grass
+while a cell exists with |options| &gt; 1:
+  c <- cell with fewest options (minimum entropy)
+  pick one tile at c (weighted)
+  at c, set options <- {that tile}
+  queue <- {c}
+  propagate constraints to neighbors
+if any cell has 0 options:
+  reseed RNG and retry</pre>
+          </div>
+        </details>
+      </section>
+
+      <div class="resources">
+        <h3>resources</h3>
+        <ul>
+          <li><a class="link" href="https://www.tylerxhobbs.com/words/flow-fields">flow field art</a> - tyler hobbs</li>
+          <li><a class="link" href="https://cs184-firesim.github.io/final-report/">fire simulation</a> - Eric Ge, Debbie Liang, Ziyao Zhang - cs184</li>
+          <li><a class="link" href="https://www.newcomplexlight.org/designing-beauty-the-art-of-cellular-automata/">cell art - claudio conti</li>
+          <li><a class="link" href="https://playground.babylonjs.com/#QZ6OPP#3">chunk terrain playground</a> - babylon.js</li>
+          <li><a class="link" href="https://github.com/mxgmn/MarkovJunior">markov chain implementations</a> - mxgmn on github</li>
+          <li><a class="link" href="https://yuu6883.github.io/MarkovJuniorWeb/">markov chain web playground</a> - yuu6883</li>
+          <li><a class="link" href="https://marian42.de/article/wfc/">wave function collapse infinite city</a> - marian42</li>
+          <li><a class="link" href="https://github.com/mxgmn/WaveFunctionCollapse">wave function collapse examples</a> - mxgmn on github</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <script src="flowfield.js" defer></script>
+  <script src="fire.js" defer></script>
+  <script src="room.js" defer></script>
+  <script src="wfc-city.js" defer></script>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+      }
+    }
+  </script>
+  <script type="module" src="voxels.js"></script>
+</body>
+</html>
