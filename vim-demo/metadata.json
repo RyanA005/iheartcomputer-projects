@@ -1,0 +1,9 @@
+{
+  "title": "How to Vim",
+  "subtitle": "text editing and a case for mastering everything you do",
+  "topics": ["Vim", "Unix", "Productivity"],
+  "author": "ryan-alport",
+  "date": "2026-01-24",
+  "thumbnail": "images/vim-logo.svg",
+  "listed": false
+}

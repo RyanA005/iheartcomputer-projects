@@ -1,0 +1,8 @@
+{
+  "title": "Fundamentals of Physics Simulation",
+  "subtitle": "building a basic physics engine from scratch in C",
+  "topics": ["Physics", "Simulation", "C"],
+  "author": "armen-deroian",
+  "date": "2026-03-11",
+  "thumbnail": "images/initial_demo.gif"
+}

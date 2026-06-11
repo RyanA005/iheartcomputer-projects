@@ -1,0 +1,9 @@
+{
+  "title": "AI Image Generation",
+  "subtitle": "building a simple autoencoder from scratch in C",
+  "topics": ["Machine Learning", "C", "Autoencoders"],
+  "author": "ryan-alport",
+  "date": "2026-02-18",
+  "thumbnail": "images/freak1.bmp",
+  "video": "https://www.youtube.com/watch?v=0VB2xhwnLvc"
+}

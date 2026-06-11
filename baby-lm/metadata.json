@@ -1,0 +1,9 @@
+{
+  "title": "Foundations of Language Models",
+  "subtitle": "internals demonstrated through a simple implementation",
+  "topics": ["Language Models", "NLP", "C"],
+  "author": "ryan-alport",
+  "date": "2026-02-11",
+  "thumbnail": "images/provider-logos.png",
+  "video": "https://www.youtube.com/watch?v=2xtbi58AY3I"
+}

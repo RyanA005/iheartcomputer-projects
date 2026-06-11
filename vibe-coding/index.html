@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/x-icon" href="/logo.png">
+  <title>Vibe Coding — IHEARTCOMPUTER</title>
+  <meta name="description" content="A beginner's guide to vibe coding — building DeckSense from zero to the App Store with AI-powered development. By Aidan Lowell.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/global.css">
+  <!-- present.css: /present only, do not add to site-wide layout -->
+  <link rel="stylesheet" href="assets/css/present.css">
+</head>
+<body class="present-page">
+
+  <div id="present-deck" class="is-unlocked">
+
+    <header class="site-header">
+      <div class="site-header-inner">
+        <a href="/" class="site-logo present-ihc-brand">I<span class="present-heart">♥</span>COMPUTER</a>
+        <nav class="site-nav">
+          <a href="/">home</a>
+          <a href="/projects/">projects</a>
+          <a href="/about/#aidan-lowell">Aidan Lowell</a>
+          <a href="https://decksense.app" target="_blank" rel="noopener noreferrer">decksense.app</a>
+        </nav>
+      </div>
+    </header>
+    <p class="present-credit">presentation by <a href="/about/#aidan-lowell">Aidan Lowell</a> · originally from <a href="https://decksense.app/present/" target="_blank" rel="noopener noreferrer">decksense.app/present</a></p>
+
+    <main class="present-main">
+      <nav class="present-section-nav" aria-label="Presentation sections">
+        <a href="#s0" data-present-scroll>Intro</a>
+        <a href="#s1" data-present-scroll>Vibe coding</a>
+        <a href="#s2" data-present-scroll>Tools</a>
+        <a href="#s3" data-present-scroll>DeckSense</a>
+        <a href="#s4" data-present-scroll>Process</a>
+        <a href="#s5" data-present-scroll>Claude Code</a>
+        <a href="#s6" data-present-scroll>Example</a>
+        <a href="#s7" data-present-scroll>Learn</a>
+        <a href="#s8" data-present-scroll>Challenges</a>
+        <a href="#s9" data-present-scroll>Start</a>
+        <a href="#s10" data-present-scroll>Get Certified</a>
+        <a href="#s11" data-present-scroll>Close</a>
+      </nav>
+
+      <section id="s0" class="present-section">
+        <div class="present-hero">
+          <div class="present-hero-aside">
+            <div class="present-hero-aside-inner">
+              <p class="present-hero-kicker">Vibe</p>
+              <p class="present-hero-kicker">coding</p>
+              <p class="present-hero-kicker-sub">A beginner&apos;s guide</p>
+              <div class="present-hero-rule"></div>
+            </div>
+          </div>
+          <div class="present-hero-body">
+            <h2>How I built a real app without writing every line of code</h2>
+            <p class="present-lead">From zero to the App Store using AI-powered development.</p>
+            <a class="btn btn-primary" href="https://decksense.app">Visit decksense.app</a>
+                          <img class="present-shot present-shot--hero" src="images/present-hero.png" alt="DeckSense app" loading="lazy" decoding="async">
+                      </div>
+        </div>
+      </section>
+
+      <section id="s1" class="present-section present-section--tight">
+        <h1>What even is vibe coding?</h1>
+        <div class="present-quote">
+          <p>Using AI tools to build real software by describing what you want, instead of writing every single line yourself.</p>
+        </div>
+        <div class="present-grid-3">
+          <div class="present-card">
+            <h3>What it is</h3>
+            <ul>
+              <li>Describe outcomes; AI drafts structure and boilerplate</li>
+              <li>You review, run, and refine in a tight loop</li>
+              <li>You own product decisions and integration choices</li>
+            </ul>
+          </div>
+          <div class="present-card">
+            <h3>What it is not</h3>
+            <ul>
+              <li>Not hands-off: quality still needs your judgment</li>
+              <li>Not a license to skip testing or security basics</li>
+              <li>Not instant: real bugs and edge cases still show up</li>
+            </ul>
+          </div>
+          <div class="present-card">
+            <h3>Why it works</h3>
+            <ul>
+              <li>Models excel at repetition, scaffolding, and refactors</li>
+              <li>Faster cycles mean more experiments per week</li>
+              <li>You learn structure by steering working code</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="s2" class="present-section present-section--tight">
+        <h1>The tools you need</h1>
+        <p class="present-lead">You only need a few things to get started, and most are free.</p>
+        <div class="present-grid-tools">
+          <div class="present-tool">
+            <div class="present-tool-accent" aria-hidden="true"></div>
+            <div class="present-tool-body">
+              <h3>Cursor AI</h3>
+              <div class="present-tool-role">IDE + pair programmer</div>
+              <p>Edit code, chat in context, and apply multi-file changes quickly.</p>
+            </div>
+          </div>
+          <div class="present-tool">
+            <div class="present-tool-accent" aria-hidden="true"></div>
+            <div class="present-tool-body">
+              <h3>Claude</h3>
+              <div class="present-tool-role">Reasoning + long context</div>
+              <p>Plan features, debug errors, and draft specs or prompts.</p>
+            </div>
+          </div>
+          <div class="present-tool">
+            <div class="present-tool-accent" aria-hidden="true"></div>
+            <div class="present-tool-body">
+              <h3>Expo / React Native</h3>
+              <div class="present-tool-role">Cross-platform shell</div>
+              <p>One codebase for iOS and Android with sane defaults.</p>
+            </div>
+          </div>
+          <div class="present-tool">
+            <div class="present-tool-accent" aria-hidden="true"></div>
+            <div class="present-tool-body">
+              <h3>Firebase</h3>
+              <div class="present-tool-role">Auth + data + hosting</div>
+              <p>Backends for login, sync, and serverless glue without running servers.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="s3" class="present-section present-section--tight">
+        <h1>My project: DeckSense</h1>
+        <p class="present-lead">A competitive Pokemon TCG app, live on the App Store.</p>
+        <div class="present-example-row present-example-row--decksense">
+          <div class="present-decksense-copy">
+            <div class="present-feature">
+              <div class="present-feature-bar"></div>
+              <div><h4>Deck builder</h4><p>Build legal lists fast with search, staples, and export.</p></div>
+            </div>
+            <div class="present-feature">
+              <div class="present-feature-bar"></div>
+              <div><h4>Meta analysis</h4><p>See what wins regionals and how archetypes trend.</p></div>
+            </div>
+            <div class="present-feature">
+              <div class="present-feature-bar"></div>
+              <div><h4>Card pricing</h4><p>Raw and graded signals to support trades and buys.</p></div>
+            </div>
+            <div class="present-feature">
+              <div class="present-feature-bar"></div>
+              <div><h4>AI suggestions</h4><p>Practical tweaks based on your list and format.</p></div>
+            </div>
+            <div class="present-feature">
+              <div class="present-feature-bar"></div>
+              <div><h4>Find tournaments</h4><p>Discover events and stay close to the competitive scene.</p></div>
+            </div>
+          </div>
+          <div class="present-placeholder-row present-placeholder-row--decksense">
+                          <img class="present-shot present-shot--sm present-shot--decksense" src="images/present-decksense-1.png" alt="DeckSense screenshot" loading="lazy" decoding="async">
+                                      <img class="present-shot present-shot--sm present-shot--decksense" src="images/present-decksense-2.png" alt="DeckSense screenshot" loading="lazy" decoding="async">
+                      </div>
+        </div>
+      </section>
+
+      <section id="s4" class="present-section present-section--tight">
+        <h1>How the process actually works</h1>
+        <p class="present-lead present-lead-italic">It is less like programming and more like managing a very fast intern.</p>
+        <div class="present-steps">
+            <div class="present-step">
+            <div class="present-step-top" aria-hidden="true"></div>
+            <div class="present-step-num">01</div>
+            <h3>Have an idea</h3>
+            <hr>
+            <p>Start small: one screen, one flow, one measurable outcome.</p>
+          </div>
+          <div class="present-step">
+            <div class="present-step-top" aria-hidden="true"></div>
+            <div class="present-step-num">02</div>
+            <h3>Describe it to AI</h3>
+            <hr>
+            <p>Write prompts like specs: inputs, outputs, constraints, and examples.</p>
+          </div>
+            <div class="present-step">
+            <div class="present-step-top" aria-hidden="true"></div>
+            <div class="present-step-num">03</div>
+            <h3>Run the code</h3>
+            <hr>
+            <p>Build, run on device or simulator, and collect real error messages.</p>
+          </div>
+          <div class="present-step">
+            <div class="present-step-top" aria-hidden="true"></div>
+            <div class="present-step-num">04</div>
+            <h3>Fix and repeat</h3>
+            <hr>
+            <p>Tighten requirements, add tests where it matters, and iterate.</p>
+          </div>
+        </div>
+      </section>
+
+            <section id="s5" class="present-section present-section--tight present-cc">
+        <h1 class="present-cc-main-title">Claude Code: Working Smarter</h1>
+        <p class="present-cc-sub">Most people burn through their token limit because of bad habits, not because they need a bigger plan.</p>
+
+        <div class="present-token-grid">
+          <article class="present-token-card" style="--accent:#4CD4A0">
+            <div class="present-token-accent" aria-hidden="true"></div>
+            <div class="present-token-body">
+              <span class="present-tier-badge" style="background:#4CD4A0">TIER 1</span>
+              <h3>/clear between tasks</h3>
+              <p>Wipe conversation history between unrelated tasks. Message 30 costs 31x more than message 1 because Claude rereads the whole conversation every time.</p>
+            </div>
+          </article>
+          <article class="present-token-card" style="--accent:#4CD4A0">
+            <div class="present-token-accent" aria-hidden="true"></div>
+            <div class="present-token-body">
+              <span class="present-tier-badge" style="background:#4CD4A0">TIER 1</span>
+              <h3>Use .claudeignore</h3>
+              <p>Exclude node_modules, dist, build, and log folders. If Claude cannot see it, it cannot accidentally read it or bill you for it.</p>
+            </div>
+          </article>
+          <article class="present-token-card" style="--accent:#4CD4A0">
+            <div class="present-token-accent" aria-hidden="true"></div>
+            <div class="present-token-body">
+              <span class="present-tier-badge" style="background:#4CD4A0">TIER 1</span>
+              <h3>Ask for the answer, not the explanation</h3>
+              <p>Add &quot;just give me the code, no explanation&quot; to your prompts. A concise response can use 60-70% fewer tokens than a fully explained one.</p>
+            </div>
+          </article>
+          <article class="present-token-card" style="--accent:#4C9BE8">
+            <div class="present-token-accent" aria-hidden="true"></div>
+            <div class="present-token-body">
+              <span class="present-tier-badge" style="background:#4C9BE8">TIER 2</span>
+              <h3>/compact proactively</h3>
+              <p>Run /compact after each completed feature, not when Claude warns you. Compacting on a bloated context generates a worse summary.</p>
+            </div>
+          </article>
+          <article class="present-token-card" style="--accent:#4C9BE8">
+            <div class="present-token-accent" aria-hidden="true"></div>
+            <div class="present-token-body">
+              <span class="present-tier-badge" style="background:#4C9BE8">TIER 2</span>
+              <h3>Keep CLAUDE.md lean</h3>
+              <p>It gets read on every single message, not just every session. Keep it under 200 lines. Cut anything that does not change how Claude behaves.</p>
+            </div>
+          </article>
+          <article class="present-token-card" style="--accent:#4C9BE8">
+            <div class="present-token-accent" aria-hidden="true"></div>
+            <div class="present-token-body">
+              <span class="present-tier-badge" style="background:#4C9BE8">TIER 2</span>
+              <h3>Disconnect unused MCP servers</h3>
+              <p>Each connected MCP server adds roughly 18,000 tokens per message silently. Run /context at the start of each session and disconnect what you are not using.</p>
+            </div>
+          </article>
+          <article class="present-token-card" style="--accent:#F3C853">
+            <div class="present-token-accent" aria-hidden="true"></div>
+            <div class="present-token-body">
+              <span class="present-tier-badge" style="background:#F3C853;color:#0D0D1A">TIER 3</span>
+              <h3>Spawn sub-agents for multi-file tasks</h3>
+              <p>If a task needs 3 or more files analyzed, spawn a sub-agent and only return summarized insights back to your main session.</p>
+            </div>
+          </article>
+          <article class="present-token-card" style="--accent:#F3C853">
+            <div class="present-token-accent" aria-hidden="true"></div>
+            <div class="present-token-body">
+              <span class="present-tier-badge" style="background:#F3C853;color:#0D0D1A">TIER 3</span>
+              <h3>Reference files explicitly</h3>
+              <p>Instead of &quot;find where we handle auth,&quot; say &quot;check src/auth/middleware.ts, specifically validateToken.&quot; Vague exploration triggers multi-file reads.</p>
+            </div>
+          </article>
+          <article class="present-token-card" style="--accent:#F3C853">
+            <div class="present-token-accent" aria-hidden="true"></div>
+            <div class="present-token-body">
+              <span class="present-tier-badge" style="background:#F3C853;color:#0D0D1A">TIER 3</span>
+              <h3>Rate limits are rolling, not daily</h3>
+              <p>Your quota does not reset at midnight. It is a rolling window. Tokens you used 5 hours ago start becoming available again, so plan your heavy sessions accordingly.</p>
+            </div>
+          </article>
+        </div>
+
+        <div class="present-bonus-divider" role="presentation">
+          <span class="present-bonus-line"></span>
+          <span class="present-bonus-label">BONUS: CODE FROM ANYWHERE</span>
+          <span class="present-bonus-line"></span>
+        </div>
+
+        <h2 class="present-cc-b-title">How to Code From Your Phone</h2>
+        <p class="present-cc-b-sub">Claude Code runs in your terminal. If you can access your terminal remotely, you can code from anywhere, including your phone.</p>
+
+        <div class="present-cc-steps">
+          <div class="present-step present-cc-step">
+            <div class="present-step-top" style="background:#4C9BE8" aria-hidden="true"></div>
+            <div class="present-step-num">01</div>
+            <h3>Install Claude Code</h3>
+            <hr>
+            <p>Open your terminal and run: npm install -g @anthropic-ai/claude-code then run claude to authenticate. Claude Code lives in your terminal and connects directly to Anthropic&apos;s API. No separate app needed.</p>
+            <div class="present-terminal-box">
+              <div class="present-terminal-label">TERMINAL</div>
+              <pre>npm install -g @anthropic-ai/claude-code
+claude</pre>
+            </div>
+          </div>
+          <div class="present-step present-cc-step">
+            <div class="present-step-top" style="background:#F3C853" aria-hidden="true"></div>
+            <div class="present-step-num">02</div>
+            <h3>Access From Anywhere</h3>
+            <hr>
+            <p>Use a tool like SSH, Termius, or Tailscale to connect to your computer remotely from your phone. Once connected, you are in your actual terminal, and Claude Code works exactly the same way it does on your laptop.</p>
+            <div class="present-rc-tip">
+              <p>Tailscale is the easiest option: it creates a private network between your devices. Free tier is enough. Install it on your computer and phone, then SSH in using your machine&apos;s Tailscale IP.</p>
+            </div>
+          </div>
+          <div class="present-step present-cc-step">
+            <div class="present-step-top" style="background:#4CD4A0" aria-hidden="true"></div>
+            <div class="present-step-num">03</div>
+            <h3>Claude Code Remote Control</h3>
+            <hr>
+            <p>Anthropic built a Remote Control feature into Claude Code specifically for mobile use. Activate it in your Claude Code session with /rc. It opens a web interface you can control from any browser, including Safari on your phone.</p>
+            <div class="present-rc-tip">
+              <p>This is how DeckSense was built away from the desk. Start a task on your laptop, then pick it up on your phone during a commute or between classes.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="s6" class="present-section present-section--tight">
+        <h1>A real example</h1>
+        <div class="present-example-row present-example-row--with-bridge">
+          <div class="present-code-wrap">
+            <div class="present-code-label">CURSOR PROMPT</div>
+            <pre>Build a &quot;Meta Decks&quot; screen for my Expo app. Fetch GET /api/meta/analysis?range=30d. Show a scrollable list sorted by usage: deck name, usage %, win rate, and up to 3 tags per row. Use my existing dark theme and loading/error states. No new dependencies.</pre>
+          </div>
+          <div class="present-example-bridge" aria-hidden="true">
+            <span class="present-arrow">&rarr;</span>
+          </div>
+          <div class="present-example-aside present-example-aside--dual">
+            <div class="present-example-shots">
+                              <img class="present-shot present-shot--sm present-shot--example" src="images/present-example-1.png" alt="Meta decks screen" loading="lazy" decoding="async">
+                                            <img class="present-shot present-shot--sm present-shot--example" src="images/present-example-2.png" alt="Meta decks detail or state" loading="lazy" decoding="async">
+                          </div>
+            <p class="present-lead present-example-caption">
+              Full working screen<br>
+              Live tournament data<br>
+              Sorted by usage<br>
+              Done in roughly 15 minutes
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="s7" class="present-section present-section--tight">
+        <h1>What you learn (even without writing code)</h1>
+        <p class="present-lead">Vibe coding is not a shortcut, it is a different path to the same skills.</p>
+        <div class="present-learn-grid">
+          <div class="present-learn-card">
+            <div class="present-learn-bar"></div>
+            <div><h4>How apps are structured</h4><p>Screens, navigation, state, and data flow start to click.</p></div>
+          </div>
+          <div class="present-learn-card">
+            <div class="present-learn-bar"></div>
+            <div><h4>How to debug</h4><p>You read stack traces, logs, and repro steps like a builder.</p></div>
+          </div>
+          <div class="present-learn-card">
+            <div class="present-learn-bar"></div>
+            <div><h4>How to think like a developer</h4><p>You break problems into smaller, testable pieces.</p></div>
+          </div>
+          <div class="present-learn-card">
+            <div class="present-learn-bar"></div>
+            <div><h4>How to ask good questions</h4><p>Clear prompts and constraints get better answers.</p></div>
+          </div>
+          <div class="present-learn-card">
+            <div class="present-learn-bar"></div>
+            <div><h4>How to ship</h4><p>You learn versioning, builds, and what good enough means.</p></div>
+          </div>
+          <div class="present-learn-card">
+            <div class="present-learn-bar"></div>
+            <div><h4>What real products need</h4><p>Auth, errors, empty states, and performance are part of the job.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="s8" class="present-section present-section--tight">
+        <h1>Challenges and honest takeaways</h1>
+        <p class="present-lead">It is not all smooth sailing. Here is what actually trips people up.</p>
+        <div class="present-learn-grid">
+          <div class="present-learn-card">
+            <div class="present-learn-bar"></div>
+            <div>
+              <span class="present-tag">Hard</span>
+              <h4>Context limits and drift</h4>
+              <p>Long projects need discipline: summaries, files, and checkpoints.</p>
+            </div>
+          </div>
+          <div class="present-learn-card">
+            <div class="present-learn-bar"></div>
+            <div>
+              <span class="present-tag">Real talk</span>
+              <h4>Overconfidence on first draft</h4>
+              <p>Generated code looks done before it is verified end to end.</p>
+            </div>
+          </div>
+          <div class="present-learn-card">
+            <div class="present-learn-bar"></div>
+            <div>
+              <span class="present-tag">Lesson</span>
+              <h4>Unknown unknowns</h4>
+              <p>You still discover platform quirks, APIs, and store rules the hard way.</p>
+            </div>
+          </div>
+          <div class="present-learn-card">
+            <div class="present-learn-bar"></div>
+            <div>
+              <span class="present-tag">Hard</span>
+              <h4>Security and secrets</h4>
+              <p>Keys belong out of the client; reviews catch mistakes late if you rush.</p>
+            </div>
+          </div>
+          <div class="present-learn-card">
+            <div class="present-learn-bar"></div>
+            <div>
+              <span class="present-tag">Real talk</span>
+              <h4>Design debt</h4>
+              <p>Fast UI stacks up; polish takes intentional passes.</p>
+            </div>
+          </div>
+          <div class="present-learn-card">
+            <div class="present-learn-bar"></div>
+            <div>
+              <span class="present-tag">Lesson</span>
+              <h4>Shipping beats perfect</h4>
+              <p>Small releases teach you more than endless refactors.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="s9" class="present-section present-section--tight">
+        <h1>How to get started this week</h1>
+        <p class="present-lead">Three concrete steps. No excuses.</p>
+        <div class="present-start-row">
+          <div class="present-start-card">
+            <div class="present-start-top" aria-hidden="true"></div>
+            <p class="step-lbl">Step 1</p>
+            <h3>Install the toolchain</h3>
+            <hr>
+            <ul>
+              <li>Install Cursor</li>
+              <li>Create a free Expo project</li>
+              <li>Run it in the simulator</li>
+            </ul>
+          </div>
+          <div class="present-start-card">
+            <div class="present-start-top" aria-hidden="true"></div>
+            <p class="step-lbl">Step 2</p>
+            <h3>Build one tiny feature</h3>
+            <hr>
+            <ul>
+              <li>Pick a screen you can finish in one sitting</li>
+              <li>Prompt for UI + data shape first</li>
+              <li>Ship a screenshot, not a novel</li>
+            </ul>
+          </div>
+          <div class="present-start-card">
+            <div class="present-start-top" aria-hidden="true"></div>
+            <p class="step-lbl">Step 3</p>
+            <h3>Publish a build</h3>
+            <hr>
+            <ul>
+              <li>Use EAS or your host of choice</li>
+              <li>Fix the first real crash you see</li>
+              <li>Note what you would prompt next time</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+            <section id="s10" class="present-section present-section--tight present-cert">
+        <h1 class="present-cert-page-title">Go Further: Get Certified</h1>
+        <p class="present-cert-intro">Anthropic launched its first official technical certification in March 2026. If you are serious about building with AI, this is the credential that validates it.</p>
+
+        <div class="present-cert-what-card">
+          <h2 class="present-cert-card-title">Claude Certified Architect: Foundations (CCA)</h2>
+          <div class="present-cert-info-row">
+            <div class="present-cert-info-bar" aria-hidden="true"></div>
+            <div>
+              <div class="present-cert-info-label">FORMAT</div>
+              <p class="present-cert-info-value">60 scenario-based questions, 120 minutes, proctored</p>
+            </div>
+          </div>
+          <div class="present-cert-info-row">
+            <div class="present-cert-info-bar" aria-hidden="true"></div>
+            <div>
+              <div class="present-cert-info-label">COST</div>
+              <p class="present-cert-info-value">Free for the first 5,000 Partner Network members, then $99 per attempt</p>
+            </div>
+          </div>
+          <div class="present-cert-info-row">
+            <div class="present-cert-info-bar" aria-hidden="true"></div>
+            <div>
+              <div class="present-cert-info-label">LAUNCHED</div>
+              <p class="present-cert-info-value">March 12, 2026. Anthropic&apos;s first official technical credential</p>
+            </div>
+          </div>
+          <p class="present-cert-blurb">This is not a trivia quiz about API parameter names. Every question drops you into a real production scenario and asks you to make the right architectural call. Agentic loops, multi-agent orchestration, MCP tool integration: the depth is real.</p>
+        </div>
+
+        <h2 class="present-cert-h2">What the Exam Tests</h2>
+        <div id="cca-domain-bars" class="present-cca-bars">
+          <div class="present-cca-domain-row">
+            <div class="present-cca-name">Agentic Architecture and Orchestration</div>
+            <div class="present-cca-track"><div class="present-cca-bar-fill" data-pct="27" style="--bar:#F3C853"></div></div>
+            <div class="present-cca-pct">27%</div>
+          </div>
+          <div class="present-cca-domain-row">
+            <div class="present-cca-name">Claude Code Configuration and Workflows</div>
+            <div class="present-cca-track"><div class="present-cca-bar-fill" data-pct="20" style="--bar:#4C9BE8"></div></div>
+            <div class="present-cca-pct">20%</div>
+          </div>
+          <div class="present-cca-domain-row">
+            <div class="present-cca-name">Prompt Engineering and Structured Output</div>
+            <div class="present-cca-track"><div class="present-cca-bar-fill" data-pct="20" style="--bar:#4CD4A0"></div></div>
+            <div class="present-cca-pct">20%</div>
+          </div>
+          <div class="present-cca-domain-row">
+            <div class="present-cca-name">Tool Design and MCP Integration</div>
+            <div class="present-cca-track"><div class="present-cca-bar-fill" data-pct="18" style="--bar:#CC785C"></div></div>
+            <div class="present-cca-pct">18%</div>
+          </div>
+          <div class="present-cca-domain-row">
+            <div class="present-cca-name">Context Management and Reliability</div>
+            <div class="present-cca-track"><div class="present-cca-bar-fill" data-pct="15" style="--bar:#6C4FD4"></div></div>
+            <div class="present-cca-pct">15%</div>
+          </div>
+        </div>
+
+        <h2 class="present-cert-h2">How to Prepare</h2>
+        <div class="present-cert-prep-row">
+          <div class="present-start-card">
+            <div class="present-start-top" style="background:#F3C853" aria-hidden="true"></div>
+            <p class="step-lbl">STEP 1</p>
+            <h3>Anthropic Academy (Free)</h3>
+            <hr>
+            <p class="present-cert-prep-p">13 free self-paced courses on Skilljar: no paywall, no subscription. Start with Claude 101 and AI Fluency, then move to Building with the Claude API (8.1 hours; this is the core material). Finish with the MCP and Claude Code courses.</p>
+            <p class="present-cert-link-wrap"><a class="present-cert-link" href="https://academy.anthropic.com" target="_blank" rel="noopener noreferrer">academy.anthropic.com</a></p>
+          </div>
+          <div class="present-start-card">
+            <div class="present-start-top" style="background:#4C9BE8" aria-hidden="true"></div>
+            <p class="step-lbl">STEP 2</p>
+            <h3>Join the Claude Partner Network</h3>
+            <hr>
+            <p class="present-cert-prep-p">The certification is currently available through the Claude Partner Network, which any organization can join for free. The first 5,000 partner employees get access at no cost. Joining also gets you early access to every new certification tier as Anthropic releases them through 2026.</p>
+            <p class="present-cert-link-wrap"><a class="present-cert-link" href="https://www.anthropic.com/partners" target="_blank" rel="noopener noreferrer">anthropic.com/partners</a></p>
+          </div>
+          <div class="present-start-card">
+            <div class="present-start-top" style="background:#4CD4A0" aria-hidden="true"></div>
+            <p class="step-lbl">STEP 3</p>
+            <h3>Build Production Projects</h3>
+            <hr>
+            <p class="present-cert-prep-p">The exam tests real architecture decisions, not memorized facts. Candidates who have built actual agentic systems, worked with MCP integrations, and shipped Claude Code workflows have a significant advantage. Building DeckSense is exactly the kind of experience that prepares you for this exam.</p>
+          </div>
+        </div>
+
+        <div class="present-cert-callout">
+          <div class="present-cert-callout-bar" aria-hidden="true"></div>
+          <div class="present-cert-callout-text">
+            <h3>Why This Matters for Vibe Coders</h3>
+            <p>Building DeckSense using Claude Code, Cursor, and Expo Router already covers Domain 3 (Claude Code) and Domain 4 (Prompt Engineering) of the exam in practice. If you go on to wire up MCP servers, design agentic suggestion pipelines, or build multi-agent workflows, you are covering Domains 1 and 2 as well. The certification is the official way to prove that work means something.</p>
+          </div>
+        </div>
+
+        <div class="present-cert-stats">
+          <div class="present-cert-stat">
+            <div class="present-cert-stat-num">30,000+</div>
+            <div class="present-cert-stat-label">Accenture professionals being trained on Claude</div>
+          </div>
+          <div class="present-cert-stat">
+            <div class="present-cert-stat-num">350,000</div>
+            <div class="present-cert-stat-label">Cognizant employees with Claude access globally</div>
+          </div>
+          <div class="present-cert-stat">
+            <div class="present-cert-stat-num">$100M</div>
+            <div class="present-cert-stat-label">Anthropic&apos;s 2026 investment in partner training</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="s11" class="present-section">
+        <div class="present-closing">
+          <div class="present-closing-inner">
+            <h2>You don&apos;t need to know how to code.</h2>
+            <p class="line2">You just need to know what you want to build.</p>
+            <div class="rule"></div>
+            <p><a href="https://decksense.app">Check out DeckSense at decksense.app</a></p>
+            <p class="meta"><a href="/about/#aidan-lowell">Aidan Lowell</a> &middot; <a href="https://decksense.app" target="_blank" rel="noopener noreferrer">decksense.app</a> &middot; <a href="https://www.instagram.com/decksense.app" target="_blank" rel="noopener noreferrer">@decksense</a></p>
+            <p class="q">Questions?</p>
+            <p class="logo">DeckSense</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer present-ihc-footer">
+      <div class="site-footer-inner">
+        <p>Presentation by <a href="/about/#aidan-lowell">Aidan Lowell</a> · <a href="https://decksense.app" target="_blank" rel="noopener noreferrer">decksense.app</a> · hosted on <a href="/projects/">I♥COMPUTER</a></p>
+      </div>
+    </footer>
+  </div>
+
+  <script src="assets/js/present.js"></script>
+</body>
+</html>
